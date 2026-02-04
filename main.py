@@ -20,6 +20,8 @@ def honeypot(payload: dict, x_api_key: str = Header(None)):
 
     session_id = payload["sessionId"]
     message = payload["message"]["text"]
+    if not session_id or not message:
+    raise HTTPException(status_code=400, detail="Invalid payload")
 
     session = get_session(session_id)
 
