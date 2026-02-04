@@ -5,8 +5,8 @@ import os, requests
 from scam_detector import progressive_confidence
 from sessions import get_session
 from extractor import extract
-from agent_logic import agent_reply
-from persona_engine import choose_persona
+from agesnt_logic import agent_reply
+from persona import choose_persona
 
 load_dotenv()
 app = FastAPI()
