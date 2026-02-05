@@ -41,10 +41,16 @@ def honeypot(payload: dict, x_api_key: str = Header(None)):
         send_final_callback(session_id, session)
         return {"status": "success", "reply": "Okay, thank you."}
 
-    return {
-        "status": "success",
-        "reply": agent_reply()
-    }
+    reply_text = agent_reply(
+    confidence=confidence,
+    persona=session["persona"],
+    message_count=session["messages"]
+)
+
+return {
+    "status": "success",
+    "reply": reply_text
+}
 
 def send_final_callback(session_id, session):
     payload = {
