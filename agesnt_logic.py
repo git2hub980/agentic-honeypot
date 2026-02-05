@@ -7,17 +7,17 @@ REPLIES = {
         "Ok I am checking",
         "Can u wait a min?",
         "I will confirm and tell you",
-        "Let me  this",
+        "Let me see this",
         "Give me a sec, I will do",
         "It is showing some issue",
         "I think there is a delay from bank side",
         "Something is not matching here",
-        "Please wait, system is slow"
+        "Please wait, system is slow",
         "Ig there is something wrong",
         "OTP expired. can u resend again?",
         "Server is down right now",
         "Transaction failed. Try later",
-        "Network issue detected"
+        "Network issue detected",
         "Wait its reloading"
     ],
     "hi": [
