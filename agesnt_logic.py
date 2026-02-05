@@ -92,11 +92,6 @@ def agent_reply(session):
     lang = session.get("language", "en")
     used = session["used_replies"]
 
-    if session["history"]:
-        last_msg = session["history"][-1].lower()
-        if lang == "en" and any(w in last_msg for w in ["hindi", "samajh", "language"]):
-            return "Sorry, mujhe English samajh nahi aati. Hindi mein boliye."
-
     options = REPLIES.get(lang, REPLIES["en"])
 
     reply = random.choice(options)
@@ -108,3 +103,4 @@ def agent_reply(session):
 
     time.sleep(random.uniform(0.8, 2.5))
     return reply
+
