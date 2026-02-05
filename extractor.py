@@ -1,10 +1,11 @@
+# extractor.py
 import re
 
-def extract(text, intel):
-    upi = re.findall(r"[a-zA-Z0-9.\-_]{2,}@[a-zA-Z]{2,}", text)
-    links = re.findall(r"https?://\S+", text)
-    phones = re.findall(r"\+?\d{10,13}", text)
+def extract(message, intelligence):
+    upi = re.findall(r"[a-zA-Z0-9.\-_]{2,}@[a-zA-Z]{2,}", message)
+    phones = re.findall(r"\b\d{10}\b", message)
+    links = re.findall(r"https?://\S+", message)
 
-    intel["upiIds"] += upi
-    intel["links"] += links
-    intel["phones"] += phones
+    intelligence["upiIds"].extend(upi)
+    intelligence["phones"].extend(phones)
+    intelligence["links"].extend(links)
