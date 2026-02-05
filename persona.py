@@ -1,16 +1,5 @@
-def choose_persona(confidence: float) -> dict:
-    """
-    Persona layer is now only a behavior controller.
-    It does NOT decide language or replies.
-    """
-
+def choose_persona(confidence: float, history) -> dict:
     if confidence >= 0.9:
-        return {
-            "allow_reply": True,
-            "force_failure": True
-        }
+        return {"allow_reply": True, "force_failure": True}
 
-    return {
-        "allow_reply": True,
-        "force_failure": False
-    }
+    return {"allow_reply": True, "force_failure": False}
