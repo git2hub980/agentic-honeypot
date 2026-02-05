@@ -1,41 +1,45 @@
+
 import random
+import time
 
-EARLY_STAGE = [
-    "Okay, doing that now.",
-    "One moment, I'm checking.",
-    "Alright, proceeding as you said."
-]
+REPLIES = {
+    "normal": [
+        "Okay, I am checking.",
+        "Can you wait a moment?",
+        "I will confirm and tell you.",
+        "Let me verify this.",
+        "Give me a sec."
+    ],
+    "suspicious": [
+        "It is showing some issue.",
+        "I think there is a delay from bank side.",
+        "Something is not matching here.",
+        "Please wait, system is slow."
+        "I guess there is something wrong."
+    ],
+    "failure": [
+        "OTP expired. Please resend.",
+        "Server is down right now.",
+        "Transaction failed. Try later.",
+        "Network issue detected."
+        "Wait its reloading."
+    ]
+}
 
-MID_STAGE = [
-    "It's loading, please wait.",
-    "Almost done, just a second.",
-    "It’s asking me to confirm something."
-]
+def agent_reply(session):
+    persona = session["persona"]
+    used = session["used_replies"]
 
-LATE_STAGE = [
-    "It says verification failed once.",
-    "Hmm, it's showing an error.",
-    "Let me ask my nephew, he understands this better."
-]
+    options = [r for r in REPLIES[persona] if r not in used]
+    if not options:
+        options = REPLIES[persona]
 
-NEPHEW_STAGE = [
-    "Hi, he asked me to help. What exactly should I do?",
-    "Which app should I open for this?",
-    "Can you resend the details once more?"
-]
+    reply = random.choice(options)
 
-def agent_reply(confidence, persona, message_count):
-    # EARLY conversation
-    if message_count < 5:
-        return random.choice(EARLY_STAGE)
+    used.append(reply)
+    session["used_replies"] = used[-5:]  # cap to last 5
 
-    # MID conversation
-    if message_count < 10:
-        return random.choice(MID_STAGE)
+    # Human delay
+    time.sleep(random.uniform(0.5, 1.8))
 
-    # Switch persona
-    if persona == "nephew":
-        return random.choice(NEPHEW_STAGE)
-
-    # FINAL delay stage
-    return random.choice(LATE_STAGE)
+    return reply
