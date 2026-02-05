@@ -1,17 +1,17 @@
-SCAM_KEYWORDS = [
+KEYWORDS = [
     "blocked", "verify", "urgent", "upi",
     "account", "suspended", "click",
     "otp", "bank" , "100%free", "winner" , "act now" , "guaranteed", "Don't wait", "limited time", "bonus", "gift card"
 ]
 
-def progressive_confidence(text, history):
+def progressive_confidence(message, history):
     score = 0.0
-    text = text.lower()
+    text = message.lower()
 
-    for kw in SCAM_KEYWORDS:
+    for kw in KEYWORDS:
         if kw in text:
             score += 0.12
 
-    score += 0.08 * len(history)
+    score += min(len(history)*0.03,0.3)
 
     return min(score, 1.0)
