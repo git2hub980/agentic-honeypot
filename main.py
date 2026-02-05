@@ -1,6 +1,5 @@
 from fastapi import FastAPI, Header, HTTPException
 from language_detector import detect_language
-from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 import os, requests
 
@@ -40,18 +39,16 @@ def honeypot(payload: dict, x_api_key: str = Header(None)):
 
     if confidence > 0.9 or session["messages"] > 18:
         send_final_callback(session_id, session)
-        return JSONResponse(
-            content={
+        return {
         "status": "success",
         "reply": agent_reply(session)
     }
- )
-return JSONResponse(
-    content={
+ 
+return {
         "status": "success",
         "reply": agent_reply(session)
     }
-)
+
 
 def send_final_callback(session_id, session):
     payload = {
