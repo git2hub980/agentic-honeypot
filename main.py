@@ -39,9 +39,7 @@ def honeypot(payload: dict, x_api_key: str = Header(None)):
 
     if confidence > 0.9 or session["messages"] > 18:
         send_final_callback(session_id, session)
-        return {"status": "success", "reply": "Okay, thank you."}
-
-    return {
+        return {
         "status": "success",
         "reply": agent_reply(session)
     }
