@@ -1,4 +1,4 @@
-SESSIONS = {}
+
 
 def get_session(session_id):
     if session_id not in SESSIONS:
@@ -8,6 +8,7 @@ def get_session(session_id):
             "messages": 0,
             "persona":"normal",
             "used_replies":[],
+            "language":"en",
             "intelligence": {
                 "upiIds": [],
                 "links": [],
