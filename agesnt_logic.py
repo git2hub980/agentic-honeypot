@@ -104,7 +104,7 @@ def agent_reply(session):
         reply = random.choice(options)
 
     used.append(reply)
-    session["used_replies"] = used[-5:]
+    session["used_replies"] = used[-11:]
 
     time.sleep(random.uniform(0.8, 2.5))
     return reply
