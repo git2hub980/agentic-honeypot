@@ -1,4 +1,4 @@
-
+SESSIONS = {}
 
 def get_session(session_id):
     if session_id not in SESSIONS:
