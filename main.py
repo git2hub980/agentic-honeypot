@@ -1,3 +1,19 @@
+from fastapi import FastAPI, Header, HTTPException
+from language_detector import detect_language
+from dotenv import load_dotenv
+import os, requests
+
+from scam_detector import progressive_confidence
+from sessions import get_session
+from extractor import extract
+from agesnt_logic import agent_reply
+from persona import choose_persona
+
+load_dotenv()
+app = FastAPI()
+
+API_KEY = os.getenv("API_KEY")
+
 @app.post("/honeypot")
 def honeypot(payload: dict, x_api_key: str = Header(None)):
     if x_api_key != API_KEY:
@@ -32,3 +48,19 @@ def honeypot(payload: dict, x_api_key: str = Header(None)):
         "status": "success",
         "reply": agent_reply(session)
     }
+
+
+def send_final_callback(session_id, session):
+    payload = {
+        "sessionId": session_id,
+        "scamDetected": True,
+        "totalMessagesExchanged": session["messages"],
+        "extractedIntelligence": session["intelligence"],
+        "agentNotes": "Multi-persona honeypot with failure simulation & delay"
+    }
+
+    requests.post(
+        "https://hackathon.guvi.in/api/updateHoneyPotFinalResult",
+        json=payload,
+        timeout=5
+    )
