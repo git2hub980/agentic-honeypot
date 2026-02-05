@@ -4,11 +4,11 @@ import time
 
 REPLIES = {
     "normal": [
-        "Okay, I am checking.",
-        "Can you wait a moment?",
-        "I will confirm and tell you.",
-        "Let me verify this.",
-        "Give me a sec."
+        "Okay I am checking",
+        "Can you wait a min?",
+        "I will confirm and tell you",
+        "Let me  this",
+        "Give me a sec, I will do"
     ],
     "suspicious": [
         "It is showing some issue.",
