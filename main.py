@@ -20,8 +20,6 @@ def honeypot(payload: dict, x_api_key: str = Header(None)):
 
     session_id = payload["sessionId"]
     message = payload["message"]["text"]
-    if not session_id or not message:
-    raise HTTPException(status_code=400, detail="Invalid payload")
 
     session = get_session(session_id)
 
@@ -36,21 +34,14 @@ def honeypot(payload: dict, x_api_key: str = Header(None)):
 
     session["history"].append(message)
 
-    # STOP CONDITION
     if confidence > 0.9 or session["messages"] > 18:
         send_final_callback(session_id, session)
         return {"status": "success", "reply": "Okay, thank you."}
 
-    reply_text = agent_reply(
-    confidence=confidence,
-    persona=session["persona"],
-    message_count=session["messages"]
-)
-
-return {
-    "status": "success",
-    "reply": reply_text
-}
+    return {
+        "status": "success",
+        "reply": agent_reply(session)
+    }
 
 def send_final_callback(session_id, session):
     payload = {
@@ -58,7 +49,7 @@ def send_final_callback(session_id, session):
         "scamDetected": True,
         "totalMessagesExchanged": session["messages"],
         "extractedIntelligence": session["intelligence"],
-        "agentNotes": "Multi-persona delay-based honeypot with progressive confidence"
+        "agentNotes": "Multi-persona honeypot with failure simulation & delay"
     }
 
     requests.post(
