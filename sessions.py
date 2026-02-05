@@ -6,11 +6,14 @@ def get_session(session_id):
             "history": [],
             "confidence": 0.0,
             "messages": 0,
+            "persona":"normal",
+            "used_replies":[],
             "intelligence": {
                 "upiIds": [],
                 "links": [],
-                "phones": []
-            },
-            "persona": "victim"
+                "phones": [],
+                "bankAccounts":[],
+                "suspiciousKeywords":[]
+            }
         }
     return SESSIONS[session_id]
