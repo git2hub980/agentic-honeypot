@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Header, HTTPException
+from language_detector import detect_language
 from dotenv import load_dotenv
 import os, requests
 
@@ -22,6 +23,8 @@ def honeypot(payload: dict, x_api_key: str = Header(None)):
     message = payload["message"]["text"]
 
     session = get_session(session_id)
+    lang = detect_language(message)
+    session["language"]=lang
 
     session["messages"] += 1
     confidence = progressive_confidence(message, session["history"])
