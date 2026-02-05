@@ -42,12 +42,12 @@ def honeypot(payload: dict, x_api_key: str = Header(None)):
         return {
         "status": "success",
         "reply": agent_reply(session)
-    }
+         }
  
 return {
         "status": "success",
         "reply": agent_reply(session)
-    }
+}
 
 
 def send_final_callback(session_id, session):
