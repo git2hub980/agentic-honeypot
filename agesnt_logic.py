@@ -1,4 +1,3 @@
-
 import random
 import time
 
@@ -20,6 +19,14 @@ REPLIES = {
         "Network issue detected",
         "Wait its reloading"
     ],
+        "hinglish": [
+        "Ek sec bhai check kar raha hoon",
+        "System thoda slow hai yaar",
+        "Wait karo resend karo",
+        "Lagta hai bank side se delay hai",
+        "OTP expire ho gaya, firse bhejo"
+    ],
+
     "hi": [
         "Ek minute rukhiye",
         "Main dekh raha hoon",
@@ -103,4 +110,3 @@ def agent_reply(session):
 
     time.sleep(random.uniform(0.8, 2.5))
     return reply
-
