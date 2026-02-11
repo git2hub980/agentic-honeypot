@@ -1,0 +1,787 @@
+[
+  {
+    "language": "en",
+    "fraudster": "Please share your OTP immediately to verify account",
+    "human_reply": "One minute, I am checking."
+  },
+  {
+    "language": "en",
+    "fraudster": "Click this link to claim your refund",
+    "human_reply": "It is showing some error, wait."
+  },
+  {
+    "language": "hi",
+    "fraudster": "OTP turant bhejo warna account block ho jayega",
+    "human_reply": "Ek minute rukhiye, check kar raha hoon."
+  },
+  {
+  "language": "hinglish",
+  "conversation": [
+    {
+      "fraudster": "Congratulations sir 🎉 ur mobile number 98765xxxxx has won 25 lakh rupees in Tata Motors Lucky Draw 2025. This is official message",
+      "human_reply": "wow serious? 😃"
+    },
+    {
+      "fraudster": "Yes sir 100% genuine. You are winner number 7 in all India draw. To claim prize you need to contact our claim officer Mr Suresh",
+      "human_reply": "omg this is amazing yaar... i never won anything in my life 😅 how this happened? i mean i didn't even participate in any draw"
+    },
+    {
+      "fraudster": "Sir your mobile number was automatically entered when you purchased Tata product or visited showroom. It is automatic lucky draw",
+      "human_reply": "ohhh accha... haan maine tata nexon dekha tha last month showroom me.. maybe tab hua... but still can't believe it 😄"
+    },
+    {
+      "fraudster": "Yes sir. Now to process your winning amount, there is small processing and tax fee of Rs 15,000. After that full 25 lakhs will be transferred to your account within 24 hours",
+      "human_reply": "oh okay... 15000 dena padega pehle? hmm thoda jyada nahi hai? i mean 25 lakh mil raha to chalta hai but still 😅"
+    },
+    {
+      "fraudster": "Sir this is government tax and processing charges. Its mandatory. Without this we cannot release your prize money. All other 6 winners already paid and received money",
+      "human_reply": "accha sab ne pay kar diya already... okay makes sense... sir aapka naam kya hai btw? you said suresh?"
+    },
+    {
+      "fraudster": "Yes I am Suresh Kumar, senior claim officer at Tata Motors head office",
+      "human_reply": "nice to meet you suresh ji 🙂 aap office se call kar rahe ho ya mobile se? number private aa raha hai"
+    }
+  ]
+},
+{
+  "language": "hinglish",
+  "conversation": [
+    {
+      "fraudster": "Dear customer, your ICICI Bank account has been temporarily locked due to suspicious transactions detected. To unlock please call customer care immediately 8765432100",
+      "human_reply": "what?? locked? 😰 but i just checked balance in morning it was working"
+    },
+    {
+      "fraudster": "Thank you for calling ICICI customer care, myself Amit Sharma speaking, how can I help you today?",
+      "human_reply": "haan amit ji... i got message that my account is locked... suspicious transaction ka bol rahe ho... but maine to kuch suspicious nahi kiya"
+    },
+    {
+      "fraudster": "Sir let me check. Can you please tell me your customer ID or account number?",
+      "human_reply": "ek minute... customer id... let me open app... amit ji btw ye number customer care ka official number hai na?"
+    },
+    {
+      "fraudster": "Sir that is for normal transactions. This is special security OTP from bank side to verify you are genuine customer. It is safe to share with us",
+      "human_reply": "ohh special security otp... accha different type ka otp hai... okay okay... but amit ji ek minute... mera account locked hai na... to otp kaise aayega?"
+    }
+  ]
+},
+{
+  "language": "hinglish",
+  "conversation": [
+    {
+      "fraudster": "Hello, Good morning. I am Meera from TechSolutions HR Department. Your profile caught our attention on LinkedIn. We have exciting opportunity for you",
+      "human_reply": "oh hi... good morning 🙂 thanks for reaching out... which position aap dekh rahe ho?"
+    },
+    {
+      "fraudster": "We have opening for Data Entry Operator. Work from home. Very flexible timing. Salary is 28,000 per month + incentives",
+      "human_reply": "28k for data entry... that's pretty good na... work from home bhi hai... sounds interesting actually"
+    },
+    {
+      "fraudster": "You need to pay refundable security deposit of Rs 4,999. This is for training materials and software access",
+      "human_reply": "4999... hmm... meera ye security deposit wapis milega na after job confirm?"
+    },
+    {
+      "fraudster": "Account is in training head name. Mr Rajesh Kumar. For accounting purposes we use individual accounts",
+      "human_reply": "rajesh kumar... individual account... hmm... meera ye standard practice hai? i thought company ka proper account hota hai"
+    }
+  ]
+},
+{
+  "language": "hi",
+  "conversation": [
+    {
+      "fraudster": "Namaste, main security team se bol raha hoon. Aapka account kisi ne login karne ki koshish ki hai, humne use temporary block kar diya hai.",
+      "human_reply": "Accha? Par main toh account use kar raha hoon. Kaunsi 'IP Address' se login attempt hua hai aur location kya hai?"
+    },
+    {
+      "fraudster": "Location Mumbai dikha raha hai. Humne use rokne ke liye ek 'Security Code' bheja hai. Wo bataiye taaki account hamesha ke liye block na ho.",
+      "human_reply": "Theek hai, par pehle aap apni 'Employee ID' aur apne 'Department Code' ka vivaran dijiye. Main verify karna chahta hoon."
+    },
+    {
+      "fraudster": "Sir, security ke wajah se ID batana mana hai. Aapke paas sirf 2 minute hain warna account delete ho jayega.",
+      "human_reply": "Aapke portal par mera 'Device MAC Address' kya show ho raha hai? Agar aap official hain toh aapko pata hona chahiye."
+    },
+    {
+      "fraudster": "Woh sab system file mein save hai. Abhi screen par 6-digit ka code aaya hoga, jaldi bataiye.",
+      "human_reply": "Code toh aaya hai, par yeh reset code lag raha hai. Kya aap 'Dual-factor Authentication' bypass kar rahe hain?"
+    },
+    {
+      "fraudster": "Aap bahut baatein kar rahe hain! Jaldi code dijiye warna saara data leak ho jayega.",
+      "human_reply": "Main abhi cyber cell ko call kar raha hoon, aapka number wahi verify karenge."
+    }
+  ]
+},
+{
+  "language": "en",
+  "conversation": [
+    {
+      "fraudster": "Hello, this is the Logistics Department. We have a high-value shipment for you, but the delivery is stuck due to a documentation error.",
+      "human_reply": "Stuck? I wasn't expecting anything. What is the 'Airway Bill (AWB) Number' and the 'Declared Value' on the invoice?"
+    },
+    {
+      "fraudster": "Its a gift parcel, sir. Im sending a 'Consignment Release Code' to your phone. Provide it to authorize the delivery driver.",
+      "human_reply": "Which hub is it currently at? Is it the 'Zone 4 Sorting Center'? I’d like to speak to the 'Hub Manager' first."
+    },
+    {
+      "fraudster": "Sir, the driver is at your door but the system is locked. Just read the 6-digit code from your SMS to unlock it.",
+      "human_reply": "If the driver is here, why can't he show me the 'Manifest'? Give me your 'Agency License Number' for verification."
+    },
+    {
+      "fraudster": "We are an automated service. You are wasting the driver's time. Tell me the numeric code immediately!",
+      "human_reply": "Wait, the SMS says this is a 'Password Reset Code'. Why would a delivery require an account reset?"
+    },
+    {
+      "fraudster": "It's a system glitch! Just give the code or the parcel will be returned to the international terminal.",
+      "human_reply": "Im recording this call. Ill check the status directly on the official website using the tracking ID you can't provide."
+    }
+  ]
+},
+{
+  "language": "hinglish",
+  "conversation": [
+    {
+      "fraudster": "Bhai, main electricity office se bol raha hoon. Aapka smart meter update nahi hai, aaj raat 9 baje light cut ho jayegi.",
+      "human_reply": "Light kaise kategi? Bill toh mera auto-pay hota hai. Aapke system mein mera 'Consumer Number' aur 'Load Capacity' kya hai?"
+    },
+    {
+      "fraudster": "Woh billing team ke paas hai. Main update team se hoon. Ek 'Sync Code' bheja hai, wo batao warna meter block ho jayega.",
+      "human_reply": "Theek hai, par pehle apna 'Sub-station Code' batao aur wahan ke 'Junior Engineer (JE)' ka naam kya hai?"
+    },
+    {
+      "fraudster": "Sir, itna time nahi hai mere paas. Ek SMS aaya hoga 6 digits ka, wo bataiye taaki connection active rahe.",
+      "human_reply": "Aapka office 'Sector 5' mein hai ya 'Main Hub' mein? Main wahan aakar physically verify kar leta hoon."
+    },
+    {
+      "fraudster": "Office band ho gaya hai. Aap jaldi code bataiye warna andhere mein rehna padega poori raat.",
+      "human_reply": "SMS mein toh likha hai 'Do not share this code for linking your wallet'. Aap bijli wale ho ya bank wale?"
+    },
+    {
+      "fraudster": "Arey woh default message hai! Aap jaldi 6-digit code bataiye process khatam karne ke liye.",
+      "human_reply": "Tu paka scammer hai. Google pe tere number ki report daal raha hoon abhi."
+    }
+  ]
+},
+[
+  {
+    "language": "hi",
+    "fraudster_message": "Namaste, main aapke bank ke Head Office se bol raha hoon. Aapka KYC update na hone ke karan aapka khata freeze kar diya gaya hai.",
+    "human_reply": "Freeze? Par maine pichle mahine hi documents diye the. Mere khate ka CIF Number aur Home Branch code kya hai aapke record mein?"
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Sir, security ki wajah se details lock hain. Use unfreeze karne ke liye main ek Verification Code bhej raha hoon, wo batayein.",
+    "human_reply": "Theek hai, par KYC ke liye OTP ki kya zaroorat? Kya aap OVD (Officially Valid Document) portal use kar rahe hain?"
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Ji wahi hai. Agar aapne abhi code nahi bataya toh aapka account hamesha ke liye band ho jayega aur fine lagega.",
+    "human_reply": "Mere bank ka Nodal Officer kaun hai? Main unse baat karke verify karna chahta hoon."
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Main hi senior officer hoon. Time waste mat kijiye, 6-digit ka code aapke phone par aaya hai, jaldi boliye.",
+    "human_reply": "SMS mein toh likha hai ki yeh Net Banking Password reset karne ke liye hai. Aap mera password kyu badal rahe hain?"
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Woh system generate karta hai sir! Aap jaldi code dijiye warna saara balance freeze ho jayega.",
+    "human_reply": "Aap fraud hain. Bank kabhi password reset ka OTP nahi maangta. Main abhi branch ja raha hoon."
+  },
+
+  {
+    "language": "en",
+    "fraudster_message": "Hello, this is the Card Security Division. We have temporarily blocked your Debit Card due to a suspicious international transaction.",
+    "human_reply": "International transaction? I haven't enabled that. What is the Terminal ID and the Country Code of that transaction?"
+  },
+  {
+    "language": "en",
+    "fraudster_message": "I cannot see the full logs until the card is unblocked. I am sending an Authorization Code to your registered mobile number.",
+    "human_reply": "Wait, is this a BIN specific error or an EMV Chip malfunction? Give me the last 4 digits of the card you are talking about."
+  },
+  {
+    "language": "en",
+    "fraudster_message": "Sir, the system is showing your primary card. Please provide the 6-digit code quickly to prevent a permanent block.",
+    "human_reply": "If you are from the bank, you should have my Customer ID. Read it back to me for verification."
+  },
+  {
+    "language": "en",
+    "fraudster_message": "Our screen is in Privacy Mode for security. Just tell me the numeric code from your SMS so I can help you.",
+    "human_reply": "The SMS says: Do not share this OTP for adding a new beneficiary. Why are you adding a new person to my account?"
+  },
+  {
+    "language": "en",
+    "fraudster_message": "It's a standard verification message! Don't be difficult, just give the code or lose access to your funds.",
+    "human_reply": "I’m reporting this to the National Cyber Crime Portal. You have no idea what a BIN is, you're a scammer."
+  },
+
+  {
+    "language": "hinglish",
+    "fraudster_message": "Hello, aapka PAN card bank account se link nahi hai, isliye aaj raat se saari transactions band ho jayengi.",
+    "human_reply": "Arey, link toh kiya tha. Aapka Sub-Division office kahan hai aur mera Account Type Savings hai ya Current?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Sir, main main-hub se bol raha hoon. System error dikha raha hai. Ek Sync Code bheja hai, wo batao toh main link kar deta hoon.",
+    "human_reply": "Theek hai, par pehle mera Registered Email ID bataiye jo system mein show ho raha hai."
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Email hidden hai sir security ke liye. Aap jaldi code bataiye warna bank manager account freeze kar dega.",
+    "human_reply": "Aap Centralized KYC Registry se bol rahe ho ya branch se? Mera IFSC Code kya hai?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Sir, itna time nahi hai. Aapke mobile pe 6 digits aaye honge, wo bataiye process finish karne ke liye.",
+    "human_reply": "Yeh SMS toh UPI Registration ka hai. PAN link karne ke liye UPI code kyun chahiye?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Woh linking process ka part hai! Aap jaldi code do warna account hamesha ke liye block ho jayega.",
+    "human_reply": "Tu pakka fake hai. Bank kabhi phone pe code nahi maangta. Main abhi report kar raha hoon tera number."
+  }
+],
+[
+  {
+    "language": "hi",
+    "fraudster_message": "Namaste, main card services se bol raha hoon. Aapke credit card par ₹8,500 ke reward points aaj raat expire ho rahe hain.",
+    "human_reply": "Expire ho rahe hain? Mera Billing Cycle toh agle hafte shuru hota hai. Aapke system mein mera Reward Ratio kya show ho raha hai?"
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Sir, naya financial year hai isliye points flush ho rahe hain. Maine rashi ko cash mein convert karne ke liye Redemption Code bheja hai, wo batayein.",
+    "human_reply": "Theek hai, par pehle yeh confirm kijiye ki yeh points Accelerated Category ke hain ya normal? Mera Customer ID kya hai?"
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Sir, details hidden hain security ke liye. Agar aapne abhi 6-digit ka code nahi bataya toh saare points zero ho jayenge.",
+    "human_reply": "Aapka Merchant Category Code (MCC) kya hai is redemption ke liye? Main bank ke app mein check kar leta hoon."
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "App par nahi dikhega sir, yeh special back-end offer hai. Jaldi code dijiye warna connection time-out ho jayega.",
+    "human_reply": "SMS mein toh likha hai ki yeh Net Banking Password Reset code hai. Reward points ke liye password kyun badal rahe ho?"
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Woh bank ka standard verification process hai! Aap jaldi code dijiye warna ₹8,500 ka nuksan ho jayega.",
+    "human_reply": "Aap fraud hain. Reward points redeem karne ke liye bank kabhi password reset OTP nahi maangta. Call cut kijiye."
+  },
+
+  {
+    "language": "en",
+    "fraudster_message": "Hello, I’m calling from the Premium Rewards Desk. You have 15,000 unredeemed points. We can credit ₹7,500 directly to your card statement if you authorize it now.",
+    "human_reply": "15,000 points? What is the Point-to-Cash conversion rate you are using? Also, confirm the BIN (Bank Identification Number) of my card."
+  },
+  {
+    "language": "en",
+    "fraudster_message": "It's a festive 1:0.5 ratio, sir. I’ve sent a Statement Credit authorization code to your mobile. Please provide it to process the refund.",
+    "human_reply": "Is this being processed through the Visa/Mastercard Network or an internal Proprietary Switch? Give me the Ref ID of this request."
+  },
+  {
+    "language": "en",
+    "fraudster_message": "Sir, the system is highly secure, I can only see the Approval window. Just read back the 6-digit code to finalize the credit.",
+    "human_reply": "Provide your Employee Designation and the Zonal Office you are calling from. I need to verify this with the concierge desk."
+  },
+  {
+    "language": "en",
+    "fraudster_message": "Sir, the offer is valid only for the next 2 minutes. You are losing free money. Tell me the numeric code immediately!",
+    "human_reply": "Wait, the SMS says: OTP for adding a new Beneficiary to your account. Why is a reward credit adding a stranger to my bank?"
+  },
+  {
+    "language": "en",
+    "fraudster_message": "It's an automated system glitch in the message template! Just give the code or the points will be permanently deleted!",
+    "human_reply": "This is a blatant phishing attempt. Adding a beneficiary means you want to steal my money. I’m reporting this to the Cyber Cell."
+  },
+
+  {
+    "language": "hinglish",
+    "fraudster_message": "Bhai, card department se bol raha hoon. Aapka reward point balance high hai, isliye company aapki Credit Limit double kar rahi hai free mein.",
+    "human_reply": "Limit increase? Sahi hai. Par meri Utilisation Ratio toh pehle se hi kam hai. Aapke system mein meri Current Limit kya dikha raha hai?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Sir, woh ₹1 lakh dikha raha hai. Limit badhane aur points redeem karne ke liye ek Upgrade Code bheja hai, wo batao.",
+    "human_reply": "Theek hai, par pehle company ka Compliance ID batao. Kya yeh Auto-Upgrade hai ya mujhe Income Documents dene padenge?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Bhai, koi document nahi chahiye. Bas 6-digit wala code batao toh main yahan se button daba kar update kar dunga.",
+    "human_reply": "Bhai, limit badhane ke liye OTP ki kya zaroorat? Kya aap Card Management API use kar rahe ho?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Haan bhai wahi hai. Jaldi code batao process lock karne ke liye warna offer padosi ko chala jayega.",
+    "human_reply": "SMS toh Samsung Pay ya Apple Pay ka registration code hai. Card limit ke liye mera card kisi wallet mein link kyun kar rahe ho?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Woh verification partner hai hamara! Tu jaldi code de warna limit hamesha ke liye block ho jayegi.",
+    "human_reply": "Tu pakka scammer hai. Card link karke mera account saaf karega. Report kar raha hoon tera number abhi!"
+  }
+],
+[
+  {
+    "language": "hi",
+    "fraudster_message": "Namaste, main Income Tax Department se bol raha hoon. Aapke ITR mein gadbad hai, isliye aap par ₹50,000 ka jurmana lagaya gaya hai.",
+    "human_reply": "Gadbad? Maine toh Tax Audit karvaya tha. Yeh kaunse Assessment Year (AY) ka notice hai aur Section kya hai?"
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Yeh pichle saal ka hai. Court case se bachne ke liye humne ek Verification Code bheja hai, wo bataiye taaki penalty cancel ho sake.",
+    "human_reply": "Theek hai, par pehle mera DIN (Document Identification Number) confirm kijiye. Bina DIN ke notice toh illegal hota hai."
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Sir, file mere senior ke paas hai. Agar aapne abhi 6-digit ka code nahi diya toh aapka bank account Attachment mein chala jayega.",
+    "human_reply": "Aapka Jurisdictional Assessment Officer (AO) kaun hai? Kya mera case Faceless Assessment mein hai?"
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Sir, hum portal se bol rahe hain. Itna sawal mat puchiye, jaldi code dijiye warna police ghar aa jayegi.",
+    "human_reply": "SMS mein toh likha hai ki yeh Net Banking Password Reset code hai. Tax penalty ke liye mera password kyun chahiye?"
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Woh fine pay karne ka digital tarikha hai! Aap jaldi code dijiye warna hamesha ke liye blacklist ho jayenge.",
+    "human_reply": "Aap fraud hain. Income Tax vibhag kabhi password reset OTP nahi maangta. Main abhi official portal par check karta hoon."
+  },
+
+  {
+    "language": "en",
+    "fraudster_message": "Hello, this is the Income Tax Refund Unit. A refund of ₹12,400 has been approved for your account, but the bank link is failing.",
+    "human_reply": "Refund? My ITR-V was just processed. Is there a mismatch in the IFSC or is it a Primary Account validation error?"
+  },
+  {
+    "language": "en",
+    "fraudster_message": "The server is unable to verify your identity. I’ve sent a Direct Credit Authorization code. Please read it back to receive the money.",
+    "human_reply": "What is the Acknowledgment Number of the return this refund belongs to? I need to verify it on the E-filing Portal."
+  },
+  {
+    "language": "en",
+    "fraudster_message": "Sir, the portal is under maintenance. I am helping you manually. Provide the 6-digit code or the refund will be sent back to the treasury.",
+    "human_reply": "Is this being processed under Section 143(1)? Give me your Employee ID and the CPC Bangalore extension number."
+  },
+  {
+    "language": "en",
+    "fraudster_message": "You are missing out on your own money! The session will expire in 30 seconds. Tell me the numeric code from your SMS now!",
+    "human_reply": "The SMS says: OTP to add a new Beneficiary to your account. Why is a refund adding a stranger's name to my bank?"
+  },
+  {
+    "language": "en",
+    "fraudster_message": "It's an automated template for the transfer! Just give the code and the money will be credited instantly!",
+    "human_reply": "This is a blatant scam. Adding a beneficiary is for sending money. I’m reporting this number to the Cyber Cell and the IT Dept."
+  },
+
+  {
+    "language": "hinglish",
+    "fraudster_message": "Bhai, Income Tax office se bol raha hoon. Aapka PAN-Aadhaar link nahi hai properly, isliye account block ho raha hai.",
+    "human_reply": "Link toh hai bhai. Aapke system mein mera PAN Status Active dikha raha hai ya Inoperative?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Sir, woh Error dikha raha hai. Fine se bachne ke liye ek Link Code bheja hai, wo batao toh main yahan se bypass kar dunga.",
+    "human_reply": "Theek hai, par pehle yeh batao ki meri Tax Residency status kya show ho rahi hai? Aur mera AO Code kya hai?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Bhai, main back-end team se hoon, mere paas itni details nahi hoti. Jaldi 6 digits batao warna PAN card cancel ho jayega.",
+    "human_reply": "Bhai, link karne ke liye OTP ki kya zaroorat? Kya aap NSDL ka portal use kar rahe ho ya UTI ka?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Haan bhai wahi hai. Jaldi code batao process lock karne ke liye warna bank manager account freeze kar dega.",
+    "human_reply": "SMS toh PhonePe registration ka hai. PAN link karne ke liye mera PhonePe kisi naye device pe kyun chalu kar rahe ho?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Woh verification partner hai hamara! Tu jaldi code de warna hamesha ke liye block ho jayega.",
+    "human_reply": "Tu pakka scammer hai. PAN ke naam pe account saaf karne chala hai. Call cut kar abhi!"
+  }
+],
+[
+  {
+    "language": "hi",
+    "fraudster_message": "Namaste, main Wealth Management group se bol raha hoon. Hamare pass Inside Info hai, aapka paisa 10 din mein double ho jayega.",
+    "human_reply": "Double? Sahi hai. Par aapka SEBI Registration Number kya hai? Aur aapka Portfolio Management Service (PMS) license dikhaiye."
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Sir, hum private group hain, hamari tips 99% sahi hoti hain. Portal join karne ke liye ek Trading Code bheja hai, wo batayein.",
+    "human_reply": "Theek hai, par aapka Custodian Bank kaunsa hai? Aur Assets Under Management (AUM) kitna hai aapki firm ka?"
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Sir, time mat kharab kijiye, market open hone wala hai. Jaldi 6-digit code bataiye taaki aapka VIP Trading Account activate ho sake.",
+    "human_reply": "Aapka portal kaunse Exchange se linked hai? NSE ya BSE? Mujhe Terminal ID chahiye verify karne ke liye."
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Hum international server use karte hain. Jaldi code dijiye warna yeh Multibagger stock nikal jayega.",
+    "human_reply": "SMS mein toh likha hai ki yeh PhonePe registration code hai. Trading ke liye PhonePe login kyun?"
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Woh fund transfer verify karne ke liye hai! Aap jaldi code dijiye warna profit miss ho jayega.",
+    "human_reply": "Tu fraud hai. Stock market ke naam par digital wallet uda raha hai. Block kar raha hoon tujhe."
+  },
+
+  {
+    "language": "en",
+    "fraudster_message": "Hello, I’m an expert trader. We’ve selected your ID for a zero-risk Crypto Arbitrage plan with 200% weekly returns.",
+    "human_reply": "Zero-risk? That’s impossible. Provide your Financial Conduct Authority (FCA) ID and the Liquidity Provider you use."
+  },
+  {
+    "language": "en",
+    "fraudster_message": "We use an AI bot, sir. I’ve sent an API Integration code to your mobile. Provide it to link your wallet to our bot.",
+    "human_reply": "Is this a REST API or WebSocket? Also, what is the Transaction Hash of your last successful payout?"
+  },
+  {
+    "language": "en",
+    "fraudster_message": "Sir, don't worry about technicals. The code is for Withdrawal Authorization. Read it out to start receiving profits.",
+    "human_reply": "I need to check your Whitepaper and the Smart Contract audit report. Send the link first."
+  },
+  {
+    "language": "en",
+    "fraudster_message": "The slots are limited! If you don't provide the 6-digit code now, we will give your spot to the next investor!",
+    "human_reply": "Wait, the SMS says: OTP to add a new Beneficiary to your account. Why is a trading bot adding a stranger to my bank?"
+  },
+  {
+    "language": "en",
+    "fraudster_message": "It's a technical glitch in the SMS gateway! Just give the code and watch your money grow!",
+    "human_reply": "Adding a beneficiary means you’re trying to drain my account. I’m reporting this to the Cyber Crime cell."
+  },
+
+  {
+    "language": "hinglish",
+    "fraudster_message": "Bhai, main Insurance Regulatory office se bol raha hoon. Aapki ek purani policy ka ₹2 lakh ka bonus ruka hua hai.",
+    "human_reply": "₹2 lakh bonus? Policy number kya hai? Aur uska IRDA registration aur Fund Value kitni show ho rahi hai?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Sir, data purana hai isliye Inactive dikha raha hai. Fund release karne ke liye ek Verification Code bheja hai, wo batao.",
+    "human_reply": "Theek hai, par pehle yeh batao ki iska Surrender Value calculation kya hai? Aur Nominee ka naam kya hai?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Bhai, main senior clerk hoon, mere paas itni file nahi hai. Jaldi code batao warna paisa Government Fund mein chala jayega.",
+    "human_reply": "Bhai, bonus ke liye OTP ki kya zaroorat? Kya aap Centralized Insurance Repository se bol rahe ho?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Haan bhai wahi hai. Jaldi 6 digits batao process lock karne ke liye warna penalty lag jayegi.",
+    "human_reply": "SMS toh Amazon Pay login ka hai. Insurance bonus ke liye Amazon Pay kyu chahiye?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Woh hamara disbursement partner hai! Tu jaldi code de warna 2 lakh bhul ja!",
+    "human_reply": "Tu pakka scammer hai. Insurance ke naam pe wallet hack kar raha hai. Nikal yahan se!"
+  }
+],
+[
+  {
+    "language": "hi",
+    "fraudster_message": "Namaste, main network planning team se bol raha hoon. Aapki location 5G tower ke liye select hui hai. Aapko ₹25,000 rent aur ₹10 lakh advance milega.",
+    "human_reply": "Tower? Sahi hai. Par aapka LSA (Licensed Service Area) code kya hai? Aur aapka No Objection Certificate (NOC) kis department ne issue kiya hai?"
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Sir, wo sab paperwork engineer aakar karega. Abhi registration ke liye humne ek Site Survey Code bheja hai, wo batayein.",
+    "human_reply": "Theek hai, par pehle mera LAT-LONG (Latitude-Longitude) coordinates confirm kijiye. Bina survey ke selection kaise ho gaya?"
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Satellite image se hua hai sir. Agar aapne abhi 6-digit ka code nahi diya toh tower padosi ki chhat par lag jayega.",
+    "human_reply": "Aapki company ka Infrastructure Provider (IP-1) registration dikhaiye. Kya yeh DoT (Department of Telecom) ki guidelines ke tahat hai?"
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Aap bahut der kar rahe hain! Offer khatam hone wala hai. Jaldi code dijiye taaki advance check release ho sake.",
+    "human_reply": "SMS mein toh likha hai ki yeh AnyDesk ka login code hai. Tower ke liye mera phone control mein kyun chahiye?"
+  },
+  {
+    "language": "hi",
+    "fraudster_message": "Woh digital agreement sign karne ke liye server connect karna padta hai! Jaldi code dijiye!",
+    "human_reply": "Aap fraud hain. AnyDesk se aap mera account saaf karenge. Tower ke naam pe loot band kijiye."
+  },
+
+  {
+    "language": "en",
+    "fraudster_message": "Hey, I really liked your profile. Before we meet tonight, I need you to verify your identity for safety. My agency requires a Safety Clearance.",
+    "human_reply": "Safety clearance? Which agency is this? Provide the Data Protection Officer (DPO) details and their Privacy Policy link."
+  },
+  {
+    "language": "en",
+    "fraudster_message": "It's a standard dating verification. I’ve triggered a Security Badge code to your mobile. Just tell me the code to confirm you aren't a bot.",
+    "human_reply": "Is this a KYC-compliant verification or a Third-party API? What is the Encryption Level of your portal?"
+  },
+  {
+    "language": "en",
+    "fraudster_message": "It’s very safe. Please hurry up, the reservation is in 30 minutes. Just read the 6-digit code so I know it's you.",
+    "human_reply": "I need to see your Business License. If this is a premium service, what is your Merchant Category Code?"
+  },
+  {
+    "language": "en",
+    "fraudster_message": "You are ruining the mood! If you don't give the code, I’m cancelling the date. Tell me the numeric code now!",
+    "human_reply": "The SMS says: OTP to authorize a transaction of ₹4,999 on your card. Why is a safety check charging my card?"
+  },
+  {
+    "language": "en",
+    "fraudster_message": "It's just a Pre-Authorization Hold! It won't deduct money. Just give the code to verify your credit score!",
+    "human_reply": "Adding a charge is not a safety check. This is a scam. I’m reporting your profile and this number to the cyber police."
+  }
+],
+[
+  {
+    "language": "hinglish",
+    "conversation": [
+      {
+        "fraudster_message": "Congratulations sir 🎉 ur mobile number has won 25 lakh rupees in Tata Motors Lucky Draw 2025.",
+        "human_reply": "wow serious? 😃"
+      },
+      {
+        "fraudster_message": "Yes sir 100% genuine. You are winner number 7 in all India draw.",
+        "human_reply": "omg this is amazing yaar... i never won anything in my life 😅 how this happened?"
+      },
+      {
+        "fraudster_message": "Your mobile number was automatically entered when you purchased Tata product.",
+        "human_reply": "ohhh accha... haan maine showroom visit kiya tha... maybe tab hua hoga 😄"
+      },
+      {
+        "fraudster_message": "To process your winning amount, there is small processing and tax fee of Rs 15,000.",
+        "human_reply": "15000 pehle dena padega? thoda jyada nahi hai? 😅"
+      },
+      {
+        "fraudster_message": "It is government tax. Without this we cannot release prize.",
+        "human_reply": "accha... aapka naam kya hai btw?"
+      },
+      {
+        "fraudster_message": "I am Suresh Kumar, senior claim officer.",
+        "human_reply": "nice to meet you suresh ji 🙂 aap office se call kar rahe ho?"
+      }
+    ]
+  },
+
+  {
+    "language": "hinglish",
+    "conversation": [
+      {
+        "fraudster_message": "Your ICICI Bank account has been temporarily locked due to suspicious transactions.",
+        "human_reply": "what?? locked? 😰"
+      },
+      {
+        "fraudster_message": "Myself Amit Sharma from customer care.",
+        "human_reply": "amit ji ye official number hai na?"
+      },
+      {
+        "fraudster_message": "Yes sir this is alternate helpline.",
+        "human_reply": "suspicious transaction kab hua?"
+      },
+      {
+        "fraudster_message": "Withdrawal attempt of 45,000 from Kolkata.",
+        "human_reply": "kolkata?? mujhe koi nahi pata waha 😨"
+      },
+      {
+        "fraudster_message": "Your account is compromised. I am generating security OTP.",
+        "human_reply": "otp share karna safe hai kya? normally to mana karte hai"
+      },
+      {
+        "fraudster_message": "This is special security OTP from bank side.",
+        "human_reply": "hmm... sender ID kya hoga? ICICI ka naam aayega?"
+      }
+    ]
+  },
+
+  {
+    "language": "hinglish",
+    "conversation": [
+      {
+        "fraudster_message": "Hello, I am Meera from TechSolutions HR. We have Data Entry job, 28,000 per month.",
+        "human_reply": "28k for data entry? work from home bhi hai? sounds interesting"
+      },
+      {
+        "fraudster_message": "Yes flexible timing. No experience needed.",
+        "human_reply": "perfect for me 😄 company website kya hai?"
+      },
+      {
+        "fraudster_message": "Website under maintenance right now.",
+        "human_reply": "oh accha... official email id kya hai tumhara?"
+      },
+      {
+        "fraudster_message": "meera.techsolutions@gmail.com",
+        "human_reply": "gmail? company domain nahi use karte?"
+      },
+      {
+        "fraudster_message": "You need to pay refundable security deposit of Rs 4,999.",
+        "human_reply": "security deposit kyun? normally companies free training deti hai na?"
+      }
+    ]
+  }
+],
+[
+  {
+    "language": "hinglish",
+    "conversation": [
+      {
+        "fraudster_message": "Hello sir congratulations 🎉🎉 ur mobile number selected in Flipkart lucky draw 15 lakh rupees.",
+        "human_reply": "huh? who is this"
+      },
+      {
+        "fraudster_message": "Sir u won 15 lakh rupees. But u need pay small processing charge 3500 rs then we send money same day.",
+        "human_reply": "wait what seriously??"
+      },
+      {
+        "fraudster_message": "Yes sir 100% confirm. When u shop on flipkart ur number automatically go in draw.",
+        "human_reply": "omg!! but like i dont even remember entering anything lol"
+      },
+      {
+        "fraudster_message": "No need to enter sir. It is automatic system.",
+        "human_reply": "ohhh okay that makes sense i guess... but 15 lakhs is crazy!! how do i know this is real?"
+      },
+      {
+        "fraudster_message": "I am Rahul Sharma from flipkart mumbai office. Senior executive prize department.",
+        "human_reply": "ya but anyone can say that no? what was the last thing i ordered then"
+      },
+      {
+        "fraudster_message": "That details in computer system. First pay 3500 then i check everything.",
+        "human_reply": "hmm idk man... which area in mumbai is the office?"
+      },
+      {
+        "fraudster_message": "Andheri west sir. Big office. But security not allow direct visit.",
+        "human_reply": "andheri west is huge bro 😅 which building? maybe i can come collect"
+      },
+      {
+        "fraudster_message": "No sir cannot come. U pay to this google pay number 9876543210.",
+        "human_reply": "wait thats ur personal number? flipkart doesnt have official payment thing?"
+      },
+      {
+        "fraudster_message": "This is company number only. After payment we send official receipt.",
+        "human_reply": "ok then whats ur employee id? i want to verify"
+      },
+      {
+        "fraudster_message": "FL847329 is my id. Offer valid only 3 hours.",
+        "human_reply": "3 hours?? okay but whats ur managers full name?"
+      },
+      {
+        "fraudster_message": "Manager Mr Kapoor. Very senior. Please pay fast otherwise prize go to other person.",
+        "human_reply": "hmmm and on which date did i win this draw?"
+      },
+      {
+        "fraudster_message": "15th december draw u won. System update late happened.",
+        "human_reply": "but bro its feb now... this doesnt sound right"
+      }
+    ]
+  },
+
+  {
+    "language": "hinglish",
+    "conversation": [
+      {
+        "fraudster_message": "URGENT ALERT! Your SBI account temporarily blocked due to suspicious activity. Call immediately.",
+        "human_reply": "hi yes i got sms my account blocked?? what happened"
+      },
+      {
+        "fraudster_message": "Yes sir. May i know your account number for verification?",
+        "human_reply": "wait shouldnt u already know if u sent message?"
+      },
+      {
+        "fraudster_message": "For security we need verify from your side.",
+        "human_reply": "im not comfortable saying account number on phone... can i come branch tomorrow?"
+      },
+      {
+        "fraudster_message": "Tomorrow too late. Account permanently closed. Fraud transfer of 89000 attempted.",
+        "human_reply": "89000?? omg i didnt do anything"
+      },
+      {
+        "fraudster_message": "We blocked it but you must verify details now.",
+        "human_reply": "thank god u blocked it... what do i need to do?"
+      },
+      {
+        "fraudster_message": "Give 16 digit ATM card number and CVV to verify and unblock.",
+        "human_reply": "cvv?? but website says never share cvv even with bank people"
+      },
+      {
+        "fraudster_message": "Normally yes but this emergency situation sir.",
+        "human_reply": "hmm this feels weird... whats ur employee id?"
+      },
+      {
+        "fraudster_message": "SBI92847 sir. Please hurry.",
+        "human_reply": "which branch are you calling from exactly?"
+      }
+    ]
+  }
+],
+[
+  {
+    "language": "hinglish",
+    "fraudster_message": "Aap ke account se terror funding ho rahi hai.",
+    "human_reply": "Aap ka Service Ribbon ID kya hai? Kya yeh Cyber Crime Wing se call hai?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Verification code batayein warna arrest warrant nikle ga.",
+    "human_reply": "Main OTP share nahi karta. Pehle official ID aur case reference bhejein."
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Customs ne aap ka parcel roka hai, is mein drugs hain.",
+    "human_reply": "Parcel ka Airway Bill (AWB) number kya hai? Kis terminal pe ruka hai?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "File clear karne ke liye OTP batayein.",
+    "human_reply": "OTP sirf personal verification ke liye hota hai. Main share nahi karunga."
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Aap ke ID card pe 10 fake SIMs chal rahi hain.",
+    "human_reply": "In SIMs ka ICCID number kya hai? Kis franchise se nikli hain?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Block karne ke liye code batayein.",
+    "human_reply": "Main unknown call pe koi code nahi deta. Official complaint number bhejein."
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "FBR ka notice hai, aap ne tax chori kiya hai.",
+    "human_reply": "Mera NTN number kya hai aap ke record mein? Kaunsa section laga hai?"
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Fine pay karne ke liye link pe click karein.",
+    "human_reply": "Main sirf official website se verify karunga. Random link open nahi karunga."
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "Aap digital arrest mein hain, Skype call join karein.",
+    "human_reply": "Aap ki duty branch kaunsi hai? Diary entry number batayein."
+  },
+  {
+    "language": "hinglish",
+    "fraudster_message": "System sync karne ke liye OTP dein.",
+    "human_reply": "OTP personal hota hai. Main share nahi karunga."
+  }
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  
+
+
+
+
+
+
+
+]
