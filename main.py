@@ -8,6 +8,8 @@ from sessions import get_session
 from extractor import extract
 from agesnt_logic import agent_reply
 from persona import choose_persona
+from rag_engine import get_rag_reply
+
 
 load_dotenv()
 app = FastAPI()
@@ -37,16 +39,31 @@ def honeypot(payload: dict, x_api_key: str = Header(None)):
 
     session["history"].append(message)
 
+    # Get intelligent reply from dataset
+    rag_reply = get_rag_reply(message, lang)
+
+# If dataset doesn't match, fallback to human delay style
+    if rag_reply == "Please wait...":
+      reply = agent_reply(session)
+    else:
+      reply = rag_reply
+
+# If high confidence, push extraction style questions
+    if confidence > 0.75:
+      if lang == "en":
+        reply += " Can you confirm your UPI ID or account number for verification?"
+    elif lang == "hi":
+        reply += " Aap apna UPI ID ya account number confirm kar sakte hain?"
+    elif lang == "hinglish":
+        reply += " Bhai apna UPI ID ya account number confirm kar do na verification ke liye."
+
+# Final stage
     if confidence > 0.9 or session["messages"] > 18:
         send_final_callback(session_id, session)
-        return {
-            "status": "success",
-            "reply": agent_reply(session)
-        }
 
     return {
-        "status": "success",
-        "reply": agent_reply(session)
+       "status": "success",
+       "reply": reply
     }
 
 
