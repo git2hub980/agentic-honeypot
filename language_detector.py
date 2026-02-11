@@ -2,6 +2,7 @@ def detect_language(text: str) -> str:
     text = text.lower()
 
     patterns = {
+        "hinglish": ["bhai", "yaar", "kya", "kyu", "nahi", "acha", "theek", "hai na", "arrey"],
         "hi": ["hai", "aap", "paise", "kripya", "turant", "jaldi"],
         "ta": ["ungal", "irukku", "panam", "udane", "konjam"],
         "te": ["mee", "undi", "dabbulu", "ventane", "konchem"],
