@@ -1,7 +1,9 @@
 KEYWORDS = [
     "blocked", "verify", "urgent", "upi",
     "account", "suspended", "click",
-    "otp", "bank" , "100%free", "winner" , "act now" , "guaranteed", "Don't wait", "limited time", "bonus", "gift card"
+    "otp", "bank" , "100% free", "winner" , "transfer", "payment", "processing fee",
+"beneficiary", "refund", "security code",
+"act now" , "guaranteed", "Don't wait", "limited time", "bonus", "gift card"
 ]
 
 def progressive_confidence(message, history):
@@ -10,7 +12,7 @@ def progressive_confidence(message, history):
 
     for kw in KEYWORDS:
         if kw in text:
-            score += 0.12
+            score += 0.18
 
     score += min(len(history)*0.03,0.3)
 
