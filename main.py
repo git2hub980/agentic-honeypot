@@ -8,8 +8,7 @@ from sessions import get_session
 from extractor import extract
 from agesnt_logic import agent_reply
 from persona import choose_persona
-from rag_engine import get_rag_reply
-
+from llm_engine import generate_smart_reply
 
 load_dotenv()
 app = FastAPI()
@@ -42,14 +41,8 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
 
     session["history"].append(message)
 
-    # Get intelligent reply from dataset
-    rag_reply = get_rag_reply(message, lang)
+    reply = generate_smart_reply(message, session)
 
-# If dataset doesn't match, fallback to human delay style
-    if rag_reply == "Please wait...":
-      reply = agent_reply(session)
-    else:
-      reply = rag_reply
 
 # If high confidence, push extraction style questions
     if confidence > 0.75:
