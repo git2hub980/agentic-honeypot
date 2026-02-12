@@ -5,19 +5,42 @@ import json
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def load_dataset_examples():
-    with open("scam_dataset.json", "r", encoding="utf-8") as f:
-        data = json.load(f)
+    try:
+        with open("scam_dataset.json", "r", encoding="utf-8") as f:
+            data = json.load(f)
 
-    examples = ""
-    for item in data[:15]:
-        fraudster = item.get("fraudster") or item.get("fraudster_message")
-        reply = item.get("reply") or item.get("human_reply")
+        examples = ""
 
-        if fraudster and reply:
-            examples += f"Scammer: {fraudster}\n"
-            examples += f"Agent: {reply}\n\n"
+        # If dataset is nested list
+        if isinstance(data, list) and len(data) > 0:
+            first_item = data[0]
 
-    return examples
+            # Case 1: List of dictionaries
+            if isinstance(first_item, dict):
+                items = data
+
+            # Case 2: List of lists
+            elif isinstance(first_item, list):
+                items = [i for sublist in data for i in sublist if isinstance(i, dict)]
+            else:
+                items = []
+
+        else:
+            items = []
+
+        for item in items[:15]:
+            fraudster = item.get("fraudster") or item.get("fraudster_message")
+            reply = item.get("reply") or item.get("human_reply")
+
+            if fraudster and reply:
+                examples += f"Scammer: {fraudster}\n"
+                examples += f"Agent: {reply}\n\n"
+
+        return examples
+
+    except Exception as e:
+        print("Dataset load error:", e)
+        return ""
 
 
 def generate_smart_reply(message, session):
