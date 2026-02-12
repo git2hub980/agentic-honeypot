@@ -17,7 +17,10 @@ app = FastAPI()
 API_KEY = os.getenv("API_KEY")
 
 @app.post("/honeypot")
-def honeypot(payload: dict, x_api_key: str = Header(None)):
+def honeypot(payload: dict, x_api_key: str = Header(...)):
+     if not API_KEY:
+        raise HTTPException(status_code=500, detail="Server API key not configured")
+    
     if x_api_key != API_KEY:
         raise HTTPException(status_code=401, detail="Unauthorized")
 
