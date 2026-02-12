@@ -156,7 +156,7 @@ Respond naturally as a slightly worried human:"""
 
 
     completion = client.chat.completions.create(
-        model="llama-3.1-8b-instant",
+        model="llama-3.1-70b-versatile",
         messages=[
             {"role": "user", "content": prompt}
         ],
