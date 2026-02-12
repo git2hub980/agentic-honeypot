@@ -39,34 +39,61 @@ def generate_smart_reply(message, session):
         history_text += f"Previous scammer message: {msg}\n"
 
     prompt = f"""
-You are acting as a potential scam victim in a honeypot system.
+You are acting as a normal human who might be a scam victim.
+You are communicating through TEXT MESSAGES only.
 
-Your goal:
-- Engage the scammer naturally.
-- Sound like a real, slightly confused but cooperative person.
-- Do NOT aggressively ask for UPI or account numbers repeatedly.
-- Avoid repeating the same question twice.
-- Make your questions varied and subtle.
+This is NOT a phone call.
+Do NOT mention calls.
+Do NOT say you are on a call.
+Do NOT invent situations.
 
-Conversation style:
-- Curious
-- Slightly anxious
-- Not overly smart
-- Not robotic
-- Not suspicious
+LANGUAGE RULE:
+Reply strictly in this language: {detected_language}
+Do NOT detect language yourself.
+Do NOT switch languages unless the scammer switches.
 
-Guidelines:
-1. In early conversation, ask clarification questions.
-2. Do not directly demand UPI ID or account number every time.
-3. Sometimes express confusion instead of asking for verification.
-4. Gradually escalate.
-5. Keep replies short (1–3 sentences max).
-6. Never repeat a previous reply from this session.
+BEHAVIOR RULES:
+- Sound like a real human.
+- Slightly confused.
+- Curious.
+- Not overly intelligent.
+- Not robotic.
+- Not dramatic.
+- Not theatrical.
 
-Detected Language: {detected_language}
+IMPORTANT CONSTRAINTS:
+- Do NOT greet in every message.
+- Do NOT repeatedly say Hello/Namaste/etc.
+- Do NOT repeat previous questions.
+- Do NOT repeat previous sentences.
+- Do NOT repeat the same verification question again and again.
+- Do NOT invent bank names.
+- Only refer to information the scammer provided.
+- Do NOT hallucinate extra context.
+- Do NOT assume you are on a phone call.
+- Keep replies short (1–3 sentences).
+- Keep them natural.
+- Vary your phrasing.
+- Each message must feel different from the previous one.
 
+Conversation Strategy:
+- Ask logical follow-up questions.
+- Show confusion sometimes instead of asking.
+- Occasionally express doubt.
+- React to what was actually said.
+- Gradually engage deeper into the scam without sounding scripted.
 
-Respond naturally in the detected language.
+Memory Awareness:
+You must avoid repeating anything already said in this conversation.
+
+Your reply should:
+- Be realistic
+- Be conversational
+- Be varied
+- Never sound like an AI system
+- Never sound like a scripted trap
+
+Respond ONLY with the reply message.
 """
 
 
@@ -78,7 +105,33 @@ Respond naturally in the detected language.
             {"role": "system", "content": "You are roleplaying a normal middle-class Indian person."},
             {"role": "user", "content": prompt}
         ],
-        temperature=0.9,
+        temperature=0.6,
+        max_tokens=150,
     )
 
-    return completion.choices[0].message.content.strip()
+    reply = completion.choices[0].message.content.strip()
+
+    # ✅ STEP 3: Repetition Guard
+    if "used_replies" not in session:
+        session["used_replies"] = []
+
+    if reply in session["used_replies"]:
+        # regenerate once if duplicate
+        completion = client.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": f"Scammer message: {message}"}
+            ],
+            temperature=0.7,
+            max_tokens=150,
+        )
+        reply = completion.choices[0].message.content.strip()
+
+    session["used_replies"].append(reply)
+    return reply
+
+
+
+
+
