@@ -10,7 +10,7 @@ if not api_key:
 client = Groq(api_key=api_key)
 
 
-def load_dataset_examples():
+def load_dataset_examples(detected_language):
     with open("scam_dataset.json", "r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -20,7 +20,9 @@ def load_dataset_examples():
         if isinstance(item, dict):
             fraud = item.get("fraudster")
             reply = item.get("human_reply")
-            if fraud and reply:
+            lang = item.get("language")
+
+            if fraud and reply and lang == detected_language:
                 examples.append(
                     f"Scammer: {fraud}\nReply: {reply}"
                 )
@@ -29,7 +31,8 @@ def load_dataset_examples():
 
 
 def generate_smart_reply(message, session):
-    examples_text = load_dataset_examples()
+   detected_language = session.get("lang", "en")
+   examples_text = load_dataset_examples(detected_language)
 
     history_text = ""
     for msg in session.get("history", [])[-5:]:
