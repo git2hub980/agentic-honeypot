@@ -64,7 +64,7 @@ Guidelines:
 6. Never repeat a previous reply from this session.
 
 Detected Language: {detected_language}
-Scam Confidence: {confidence}
+
 
 Respond naturally in the detected language.
 """
