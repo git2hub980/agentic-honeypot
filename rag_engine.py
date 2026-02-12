@@ -1,12 +1,20 @@
 import json
 import numpy as np
 import faiss
+import os
 from sentence_transformers import SentenceTransformer
+
 
 model = SentenceTransformer("all-MiniLM-L6-v2")
 
-with open("scam_dataset.json", "r", encoding="utf-8") as f:
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+dataset_path = os.path.join(BASE_DIR, "scam_dataset.json")
+
+with open(dataset_path, "r", encoding="utf-8") as f:
     data = json.load(f)
+
 
 texts = [item["fraudster"] for item in data]
 
@@ -34,7 +42,4 @@ def get_rag_reply(user_message, language):
     return best_match["human_reply"]
 
 
-    if matched_item["language"] == language:
-        return matched_item["human_reply"]
-
-    return "Please wait..."
+    
