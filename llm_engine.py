@@ -136,7 +136,7 @@ Respond ONLY with the reply message.
         completion = client.chat.completions.create(
             model="llama-3.1-8b-instant",
             messages=[
-                {"role": "system", "content": system_prompt},
+                {"role": "system", "content": prompt},
                 {"role": "user", "content": f"Scammer message: {message}"}
             ],
             temperature=0.7,
