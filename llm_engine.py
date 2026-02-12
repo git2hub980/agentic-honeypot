@@ -2,7 +2,13 @@ from openai import OpenAI
 import os
 import json
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+if not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY is not set in environment variables")
+
+client = OpenAI(api_key=OPENAI_API_KEY)
+
 
 def load_dataset_examples():
     with open("scam_dataset.json", "r", encoding="utf-8") as f:
@@ -56,7 +62,21 @@ def load_dataset_examples():
 
 
 def generate_smart_reply(message, session):
-    examples = load_dataset_examples()
+    all_examples = load_dataset_examples()
+
+    # Only use 5 similar examples
+    examples_text = ""
+    count = 0
+
+    for ex in all_examples:
+        if ex["language"] == session.get("language"):
+            examples_text += (
+                f"Scammer: {ex['fraudster']}\n"
+                f"Reply: {ex['human_reply']}\n\n"
+            )
+            count += 1
+        if count >= 5:
+            break
 
     history_text = ""
     for msg in session.get("history", [])[-5:]:
@@ -75,7 +95,7 @@ OBJECTIVES:
 - Do not repeat responses
 
 Examples of tone and style:
-{examples}
+{examples_text}
 
 Conversation so far:
 {history_text}
