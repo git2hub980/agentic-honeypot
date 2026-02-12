@@ -17,7 +17,7 @@ def detect_language(text: str) -> str:
     }
 
     def detect_language(text: str) -> str:
-    text = text.lower()
+        text = text.lower()
 
     patterns = {
         ...
