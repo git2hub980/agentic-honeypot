@@ -44,14 +44,34 @@ dimension = embeddings.shape[1]
 index = faiss.IndexFlatL2(dimension)
 index.add(np.array(embeddings))
 
+def normalize_lang(lang):
+    mapping = {
+        "en": "english",
+        "hi": "hindi",
+        "hinglish":"hinglish",
+        "ta": "tamil",
+        "te": "telugu",
+        "ml": "malayalam",
+        "mr": "marathi",
+        "gu": "gujarati",
+        "kn": "kannada"
+    }
+    return mapping.get(lang.lower(), lang.lower())
+
 
 def get_rag_reply(user_message, language):
     query_embedding = model.encode([user_message])
-    distances, indices = index.search(query_embedding, k=3)
+    distances, indices = index.search(query_embedding, k=5)
 
+    normalized_language = normalize_lang(language)
+
+    # 1️⃣ Try language match first
     for idx in indices[0]:
         matched_item = clean_data[idx]
-        if matched_item["language"] == language:
+        if normalize_lang(matched_item["language"]) == normalized_language:
             return matched_item["human_reply"]
 
-    return "Please wait..."
+    # 2️⃣ Fallback: return top similarity
+    best_idx = indices[0][0]
+    return clean_data[best_idx]["human_reply"]
+
