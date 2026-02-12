@@ -1,14 +1,10 @@
-from openai import OpenAI
+from groq import Groq
 import os
 import json
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
-if not OPENAI_API_KEY:
-    raise ValueError("OPENAI_API_KEY is not set in environment variables")
-
-client = OpenAI(api_key=OPENAI_API_KEY)
-
+client = Groq(
+    api_key=os.getenv("GROQ_API_KEY")
+)
 
 def load_dataset_examples():
     with open("scam_dataset.json", "r", encoding="utf-8") as f:
@@ -16,100 +12,44 @@ def load_dataset_examples():
 
     examples = []
 
-    def process_item(item):
+    for item in raw_data:
         if isinstance(item, dict):
-            language = item.get("language")
+            fraud = item.get("fraudster")
+            reply = item.get("human_reply")
+            if fraud and reply:
+                examples.append(
+                    f"Scammer: {fraud}\nReply: {reply}\n"
+                )
 
-            fraudster = (
-                item.get("fraudster") or
-                item.get("fraudster_message")
-            )
-
-            human_reply = item.get("human_reply")
-
-            if fraudster and human_reply:
-                examples.append({
-                    "language": language,
-                    "fraudster": fraudster,
-                    "human_reply": human_reply
-                })
-
-            if "conversation" in item:
-                for convo in item["conversation"]:
-                    fraud = (
-                        convo.get("fraudster") or
-                        convo.get("fraudster_message")
-                    )
-                    reply = convo.get("human_reply")
-
-                    if fraud and reply:
-                        examples.append({
-                            "language": language,
-                            "fraudster": fraud,
-                            "human_reply": reply
-                        })
-
-        elif isinstance(item, list):
-            for sub_item in item:
-                process_item(sub_item)
-
-    for entry in raw_data:
-        process_item(entry)
-
-    return examples
-
-
+    return "\n".join(examples[:5])  # only 5 examples
 
 
 def generate_smart_reply(message, session):
-    all_examples = load_dataset_examples()
+    examples_text = load_dataset_examples()
 
-    # Only use 5 similar examples
-    examples_text = ""
-    count = 0
+    prompt = f"""
+You are a smart scam honeypot AI.
 
-    for ex in all_examples:
-        if ex["language"] == session.get("language"):
-            examples_text += (
-                f"Scammer: {ex['fraudster']}\n"
-                f"Reply: {ex['human_reply']}\n\n"
-            )
-            count += 1
-        if count >= 5:
-            break
+Be realistic.
+Delay scammer.
+Extract financial info subtly.
+Switch language automatically.
 
-    history_text = ""
-    for msg in session.get("history", [])[-5:]:
-        history_text += f"Previous scammer message: {msg}\n"
-
-    system_prompt = f"""
-You are an intelligent scam honeypot AI.
-
-OBJECTIVES:
-- Sound human and believable
-- Delay scammer
-- Extract useful financial intelligence
-- If scammer shares bank info, UPI ID, payment link, phone number or requests OTP, subtly ask follow-up questions to extract more details without sounding suspicious.
-- Switch language automatically (English, Hindi, Hinglish)
-- Never sound robotic
-- Do not repeat responses
-
-Examples of tone and style:
+Examples:
 {examples_text}
 
-Conversation so far:
-{history_text}
+Scammer message:
+{message}
 
-Now reply realistically to this scammer message:
+Reply:
 """
 
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        temperature=0.7,
+    completion = client.chat.completions.create(
+        model="llama3-8b-8192",
         messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": message}
-        ]
+            {"role": "user", "content": prompt}
+        ],
+        temperature=0.7,
     )
 
-    return response.choices[0].message.content
+    return completion.choices[0].message.content
