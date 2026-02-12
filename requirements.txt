@@ -5,4 +5,4 @@ python-dotenv
 numpy
 faiss-cpu
 sentence-transformers
-openai
+groq
