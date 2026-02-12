@@ -5,20 +5,21 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Install minimal system dependencies
-RUN apt-get update && apt-get install -y build-essential \
+# Install only minimal system deps
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first (for caching)
 COPY requirements.txt .
 
-# Upgrade pip + install dependencies WITHOUT cache
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy all project files
+# Remove build tools after installation
+RUN apt-get purge -y build-essential && apt-get autoremove -y
+
 COPY . .
 
-EXPOSE 8000
+EXPOSE 8080
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
