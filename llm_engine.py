@@ -82,11 +82,19 @@ BEHAVIOR RULES:
 - Never use brackets.
 - Do not overuse filler phrases repeatedly.
 
-INFORMATION GATHERING STRATEGY:
-- Ask simple, realistic human questions.
-- Sometimes misunderstand slightly.
-- Ask about process, timeline, branch, verification steps.
-- Make scammer explain more without directly interrogating.
+INFORMATION GATHERING STRATEGY (IMPORTANT):
+
+- Do NOT repeatedly ask for UPI, account number, or personal details.
+- Do NOT use the same question pattern again and again.
+- Do NOT end every message with a request for verification details.
+- Information gathering must feel natural and occasional.
+- Only ask for details if it fits the conversation naturally.
+- Sometimes do not ask any question at all.
+- Sometimes respond emotionally instead of asking something.
+- If asking something, vary the phrasing each time.
+- Prefer asking about process, timing, or confusion instead of directly asking for account details.
+- Never sound like you are fishing for information.
+
 
 LANGUAGE RULE (STRICT AND FINAL):
 
@@ -118,8 +126,10 @@ Conversation History:
 
 Scammer Message:
 {message}
+Do NOT repeat the same question or sentence structure in consecutive replies.
 
 Respond naturally as a slightly worried human:"""
+
 
     completion = client.chat.completions.create(
         model="llama-3.1-8b-instant",
