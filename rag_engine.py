@@ -16,7 +16,8 @@ with open(dataset_path, "r", encoding="utf-8") as f:
     data = json.load(f)
 
 
-texts = [item["fraudster"] for item in data]
+texts = [item.get("fraudster", "") for item in data]
+
 
 embeddings = model.encode(texts)
 
