@@ -16,8 +16,23 @@ def detect_language(text: str) -> str:
         "ur": ["aap", "hai", "paise", "jaldi"]
     }
 
-    for lang, keywords in patterns.items():
-        if any(word in text for word in keywords):
-            return lang
+    def detect_language(text: str) -> str:
+    text = text.lower()
 
-    return "en"
+    patterns = {
+        ...
+    }
+
+    scores = {lang: 0 for lang in patterns}
+
+    for lang, keywords in patterns.items():
+        for word in keywords:
+            if word in text:
+                scores[lang] += 1
+
+    best_lang = max(scores, key=scores.get)
+
+    if scores[best_lang] == 0:
+        return "en"
+
+    return best_lang
