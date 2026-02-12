@@ -129,7 +129,7 @@ Respond naturally as a slightly worried human:"""
 
 
     completion = client.chat.completions.create(
-        model="llama-3.1-70b-versatile",
+        model="llama-3.1-8b-instant",
         messages=[
             {"role": "system", "content": "You are roleplaying a normal middle-class Indian person."},
             {"role": "user", "content": prompt}
