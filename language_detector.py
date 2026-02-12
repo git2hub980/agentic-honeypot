@@ -1,4 +1,7 @@
+print("LANGUAGE DETECTOR NEW VERSION LOADED")
 def detect_language(text: str) -> str:
+    if not text:
+        return "en"
     text = text.lower()
 
     patterns = {
