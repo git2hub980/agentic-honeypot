@@ -27,8 +27,8 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
     message = payload["message"]["text"]
 
     session = get_session(session_id)
-    lang = detect_language(message)
-    session["language"] = lang
+    language = detect_language(message)
+    session["language"] = language
 
     session["messages"] += 1
     confidence = progressive_confidence(message, session["history"])
@@ -46,12 +46,12 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
 
 # If high confidence, push extraction style questions
     if confidence > 0.75:
-      if lang == "en":
-        reply += " Can you confirm your UPI ID or account number for verification?"
-    elif lang == "hi":
-        reply += " Aap apna UPI ID ya account number confirm kar sakte hain?"
-    elif lang == "hinglish":
-        reply += " Bhai apna UPI ID ya account number confirm kar do na verification ke liye."
+       if language == "en":
+         reply += " Can you confirm your UPI ID or account number for verification?"
+    elif language == "hi":
+         reply += " Aap apna UPI ID ya account number confirm kar sakte hain?"
+    elif language == "hinglish":
+         reply += " Bhai apna UPI ID ya account number confirm kar do na verification ke liye."
 
 # Final stage
     if confidence > 0.9 or session["messages"] > 18:
