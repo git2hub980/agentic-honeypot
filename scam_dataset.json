@@ -759,7 +759,324 @@
     "language": "hinglish",
     "fraudster_message": "System sync karne ke liye OTP dein.",
     "human_reply": "OTP personal hota hai. Main share nahi karunga."
-  }
+  },
+  {
+  "language": "gu",
+  "fraudster": "Congratulations! Tamaro number lucky draw ma select thayu che. 10 lakh rupiya jeetya cho.",
+  "human_reply": "Arre sachhu? Hu to kabhi lottery kheli j nathi."
+},
+{
+  "language": "gu",
+  "fraudster": "Processing fee 8,000 bharvi padshe prize leva mate.",
+  "human_reply": "8000? Fee ketla mate che bhai?"
+},
+{
+  "language": "gu",
+  "fraudster": "Tamaru bank account 3 hour ma block thase. KYC update pending che.",
+  "human_reply": "Block thase? Pan KYC to karelu che."
+},
+{
+  "language": "gu",
+  "fraudster": "Hu OTP mojish, tame share karo.",
+  "human_reply": "OTP share karvu? Normally OTP share nahi karvu joiye ne?"
+},
+{
+  "language": "gu",
+  "fraudster": "Part time work. Ghar bethi 25k monthly kamao.",
+  "human_reply": "25k? Su kaam che?"
+},
+{
+  "language": "gu",
+  "fraudster": "Registration ane training fee 3,500 che.",
+  "human_reply": "3500? Refundable che ke nahi?"
+},
+{
+  "language": "gu",
+  "fraudster": "Electricity connection disconnect thase aaje. Bill pending che.",
+  "human_reply": "Disconnect? Pan bill to pay karelu che."
+},
+{
+  "language": "gu",
+  "fraudster": "Tamara parcel custom ma hold che. 1,800 fee pay karo.",
+  "human_reply": "Parcel? Mane to khaich order nathi karyu."
+},
+{
+  "language": "gu",
+  "fraudster": "Invest 50k ane 3 mahina ma 2 lakh return.",
+  "human_reply": "2 lakh in 3 months? Aa thodu jyada nathi lagtu?"
+},
+{
+  "language": "gu",
+  "fraudster": "Loan 3 lakh approved. Processing fee 5,500 pehla pay karo.",
+  "human_reply": "Loan approved? Pan mane apply j nathi karyu."
+},
+{
+  "language": "gu",
+  "fraudster": "Tamara computer ma virus detect thayu che.",
+  "human_reply": "Virus? Mara computer to normally chal tu hatu."
+},
+{
+  "language": "gu",
+  "fraudster": "Special health insurance. Registration fee 2,500.",
+  "human_reply": "Insurance? Company nu nam su che?"
+},
+{
+  "language": "gu",
+  "fraudster": "Tamaro ATM card block thase. Card number ane CVV share karo.",
+  "human_reply": "CVV? Ae to normally share nathi karta ne?"
+},
+{
+  "language": "gu",
+  "fraudster": "Income tax penalty 45,000 pending. Arrest warrant issue thase.",
+  "human_reply": "Arrest warrant? Pan tax to pay karelu che."
+},
+{
+  "language": "gu",
+  "fraudster": "Free credit card 5 lakh limit. Joining fee 3,000 only.",
+  "human_reply": "5 lakh limit? Koi bank thi offer che?"
+},
+{
+  "language": "mr",
+  "fraudster": "Tumcha number lucky draw madhe select jhala. 10 lakh rupaye jinkle.",
+  "human_reply": "Arre kharch? Mi tar kabhi lottery kheli navti."
+},
+{
+  "language": "mr",
+  "fraudster": "Processing fee 8,000 bharave lagel prize ghenyasathi.",
+  "human_reply": "8000? Fee kashala aahe bhai?"
+},
+{
+  "language": "mr",
+  "fraudster": "Tumcha bank account 3 tasaat block hoil. KYC update pending aahe.",
+  "human_reply": "Block hoil? Pan KYC tar keli aahe."
+},
+{
+  "language": "mr",
+  "fraudster": "Mi OTP pathavto. Tumhi te share kara.",
+  "human_reply": "OTP share karayche? Normally tar OTP share nahi karayche na?"
+},
+{
+  "language": "mr",
+  "fraudster": "Gharaat basun 25k kamava mahinyala. Interested?",
+  "human_reply": "25k? Kay kaam aahe?"
+},
+{
+  "language": "mr",
+  "fraudster": "Registration ani training fee 3,500 aahe.",
+  "human_reply": "3500? Refundable aahe ka?"
+},
+{
+  "language": "mr",
+  "fraudster": "Tumcha electricity connection disconnect hoil aaj. Bill pending aahe.",
+  "human_reply": "Disconnect? Pan bill tar pay kela aahe."
+},
+{
+  "language": "mr",
+  "fraudster": "Tumcha parcel custom madhe hold aahe. 1,800 fee pay kara.",
+  "human_reply": "Parcel? Mala tar kahi order nahi kele."
+},
+{
+  "language": "mr",
+  "fraudster": "Invest 50k ani 3 mahinyat 2 lakh paratava.",
+  "human_reply": "2 lakh 3 mahinyat? He khup jasta vatat nahi ka?"
+},
+{
+  "language": "mr",
+  "fraudster": "Loan 3 lakh approved. Processing fee 5,500 pahile pay kara.",
+  "human_reply": "Loan approved? Pan mala apply kelela nahi."
+},
+{
+  "language": "mr",
+  "fraudster": "Tumchya computer madhe virus detect zala.",
+  "human_reply": "Virus? Majha computer tar normal chalto hota."
+},
+{
+  "language": "mr",
+  "fraudster": "Special health insurance. Registration fee 2,500.",
+  "human_reply": "Insurance? Company che nav kay aahe?"
+},
+{
+  "language": "mr",
+  "fraudster": "Tumcha ATM card block hote. Card number ani CVV share kara.",
+  "human_reply": "CVV? Te tar normally share karat nahi na?"
+},
+{
+  "language": "mr",
+  "fraudster": "Income tax penalty 45,000 pending. Arrest warrant issue hote.",
+  "human_reply": "Arrest warrant? Pan tax tar pay kela aahe."
+},
+{
+  "language": "mr",
+  "fraudster": "Free credit card 5 lakh limit. Joining fee 3,000.",
+  "human_reply": "5 lakh limit? Koni bank madhun offer aahe ka?"
+},
+{
+  "language": "kn",
+  "fraudster": "Congratulations! Nimma number lucky draw alli select aayitu. 10 lakh rupaayi jinkidiri.",
+  "human_reply": "arre saachu? naanu yaavagalu lottery aadilla"
+},
+{
+  "language": "kn",
+  "fraudster": "Processing fee 8,000 kottre beku prize togolakke.",
+  "human_reply": "8000? fee yake bhai?"
+},
+{
+  "language": "kn",
+  "fraudster": "Nimma bank account 3 ghante alli block aagutte. KYC pending ide.",
+  "human_reply": "block aagutha? aadre KYC madiddhe"
+},
+{
+  "language": "kn",
+  "fraudster": "OTP kalustheeni. Neevu share maadi verification kosam.",
+  "human_reply": "OTP share maadbeka? normally share maadakoodadhu alle?"
+},
+{
+  "language": "kn",
+  "fraudster": "Part time work. Manealli kuthkondu 25k kamaisi monthly.",
+  "human_reply": "25k? enu kelasa?"
+},
+{
+  "language": "kn",
+  "fraudster": "Registration mattu training fee 3,500 ide.",
+  "human_reply": "3500? refundable ida?"
+},
+{
+  "language": "kn",
+  "fraudster": "Nimma electricity connection disconnect aagutte indu. Bill pending ide.",
+  "human_reply": "disconnect? aadre bill pay madiddhe"
+},
+{
+  "language": "kn",
+  "fraudster": "Nimma parcel custom alli hold ide. 1,800 fee pay maadi.",
+  "human_reply": "parcel? aadre naanu enu order maadilla"
+},
+{
+  "language": "kn",
+  "fraudster": "Invest 50k, 3 months alli 2 lakh return.",
+  "human_reply": "2 lakh in 3 months? idhu thumba jaasti ide"
+},
+{
+  "language": "kn",
+  "fraudster": "Nimma loan 3 lakh approved. Processing fee 5,500 munde pay maadi.",
+  "human_reply": "loan approved? naanu apply matra maadilla"
+},
+{
+  "language": "kn",
+  "fraudster": "Nimma computer alli virus detect aayitu.",
+  "human_reply": "virus? aadre nanma computer chennagi odthaide"
+},
+{
+  "language": "kn",
+  "fraudster": "Special health insurance. Registration fee 2,500.",
+  "human_reply": "yaava company? 2500 yake?"
+},
+{
+  "language": "kn",
+  "fraudster": "Nimma ATM card block aagutte. Card number mattu CVV share maadi.",
+  "human_reply": "CVV share maadakoodadhu alle?"
+},
+{
+  "language": "kn",
+  "fraudster": "Income tax penalty 45,000 pending. Arrest warrant issue aagutte.",
+  "human_reply": "arrest warrant? aadre tax pay madiddhe"
+},
+{
+  "language": "kn",
+  "fraudster": "Free credit card 5 lakh limit. Joining fee 3,000 only.",
+  "human_reply": "5 lakh limit? yaava bank inda?"
+},
+  {
+  "language": "ta",
+  "fraudster": "London-la irundhu unga name-la oru gift parcel vandhuruku. Customs release panna 25,000 fee katta num.",
+  "human_reply": "Enaku London-la yaarum theriyadhu sir. Parcel oda live photo anupa mudiyuma?"
+},
+{
+  "language": "ta",
+  "fraudster": "Naan Army-la iruken. Advance payment panniduren. Indha QR code scan pannunga.",
+  "human_reply": "Scan panna error varudhu sir. Neenga irukra location live share panna mudiyuma?"
+},
+{
+  "language": "ta",
+  "fraudster": "US-la doctor-ah iruken. Marriage gift Delhi airport-la stuck aagi iruku. 45,000 pay pannunga.",
+  "human_reply": "Agent-oda full name and bank account details anupunga sir. Verification panna vendiyadhu."
+},
+{
+  "language": "ta",
+  "fraudster": "Gas subsidy block aagi iruku. Indha link-la Aadhaar and bank login podunga.",
+  "human_reply": "Link unsafe nu kaatudhu sir. Enga area gas manager name sollunga."
+},
+{
+  "language": "ta",
+  "fraudster": "LIC policy-la 3 lakh bonus vandhuruku. 8,000 registration fee pay pannunga.",
+  "human_reply": "Unga manager authorization letter photo anupunga sir. Confirm pannitu pay pannuren."
+},
+{
+  "language": "ta",
+  "fraudster": "Google Chennai job select aagidichi. Registration fee 5000 pay pannunga.",
+  "human_reply": "Consultancy license and office address anupunga sir. Naan nerla vandhu panam kudukren."
+},
+{
+  "language": "ta",
+  "fraudster": "Next task-ku 10,000 invest pannunga. 15,000 return kidaikum.",
+  "human_reply": "Finance manager personal number anupunga sir. Bank verification panna vendiyadhu."
+},
+{
+  "language": "ta",
+  "fraudster": "JIO SIM block aagidum. 11 rupees recharge indha link-la pannunga.",
+  "human_reply": "Link work aagala sir. Neenga official site-la irundhu confirm pannunga."
+},
+{
+  "language": "ta",
+  "fraudster": "Flipkart double payment aagidichi. Refund vaanga UPI PIN podunga.",
+  "human_reply": "Manual refund panna mudiyuma sir? Account holder name sollunga."
+},
+{
+  "language": "ta",
+  "fraudster": "Non-bailable warrant issue aagi iruku. 50,000 bail fee katta num.",
+  "human_reply": "Warrant number and police station code sollunga sir. Verify pannitu pay pannuren."
+},
+{
+  "language": "ta",
+  "fraudster": "Tata Safari car win panniteenga. RTO tax 35,000 pay pannunga.",
+  "human_reply": "RTO agent ID card and contact number anupunga sir."
+},
+  [
+{
+  "language": "te",
+  "fraudster": "Hello, Mumbai Narcotics Branch nunchi matladutunnanu. Mee Aadhaar card meeda oka illegal parcel vachindi.",
+  "human_reply": "Sir... emiti idi? Nenu kadu sir."
+},
+{
+  "language": "te",
+  "fraudster": "Parcel lo 500 grams drugs unnayi. Meeru ippudu Digital Arrest lo unnaru. Skype call loki ravali, evariki phone cheyakudadu. Camera on cheyali.",
+  "human_reply": "Bhayam ga undi sir... please nenu em cheyaledu."
+},
+{
+  "language": "te",
+  "fraudster": "Investigation cooperate chesthe mimmulni vadilestham. Mee bank details verify cheyali. Accounts anni freeze avthayi lekapothe.",
+  "human_reply": "Sir... ma nanna nammatledu. Meeru \"Police ID Card\" and \"FIR Copy\" photo pampandi sir. Aayana chusthe gani dabbulu ivvanu antunnaru. Please sir help."
+},
+{
+  "language": "ml",
+  "fraudster": "Hello, njan Mumbai Police Headquarters-il ninnu aanu vilikkunnath. Ningalude Peru parayu.",
+  "human_reply": "Enthu patti sir? Ente peril entha prashnam?"
+},
+{
+  "language": "ml",
+  "fraudster": "Ningalude Aadhaar card upayogichu Taiwannilekk oru parcel ayachittund. Athil 2kg drugs undayirunnu. Ningal ippo \"Digital Arrest\"-il aanu.",
+  "human_reply": "Bhagavane! Sir njan pavam aanu. Njan oru pavam veethamma aanu sir. Enik ithonnum ariyilla."
+},
+{
+  "language": "ml",
+  "fraudster": "Ippo thanne Skype-il varanam. Vere aarodum parayaruth. Paranjal ningale ippo arrest cheyyan utharavu und.",
+  "human_reply": "Sir... ente phone-il Skype onnum illa. Enik ithonnum upayogikkan ariyilla sir. Njan ippo karayunnund sir."
+},
+{
+  "language": "ml",
+  "fraudster": "Karayunnathil karyamilla. Ningalude bank balance koodi check cheyyanam, illenkil accounts ellam freeze cheyyum.",
+  "human_reply": "Sir... ente veettukar ellavarum \"Fake\" aanu ennu parayunnu. Sir oru karyam cheyyamo? Ningalude \"Police ID card\" pinne \"FIR\" copy-um onnu WhatsApp-il ayakkamo? Ente husband-ine onnu kanikkan aanu. Athu kandal ayal panam tharum."
+}
+]
 ]
 
 
