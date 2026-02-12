@@ -16,13 +16,6 @@ def detect_language(text: str) -> str:
         "ur": ["aap", "hai", "paise", "jaldi"]
     }
 
-    def detect_language(text: str) -> str:
-        text = text.lower()
-
-    patterns = {
-        ...
-    }
-
     scores = {lang: 0 for lang in patterns}
 
     for lang, keywords in patterns.items():
