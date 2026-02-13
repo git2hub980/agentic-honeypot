@@ -1,33 +1,73 @@
 import re
 
-def extract(message, intelligence):
+
+def extract(message: str, intelligence: dict):
+    if not message:
+        return
+
+    text = message.lower()
+
+    # -----------------------
+    # Initialize keys safely
+    # -----------------------
     intelligence.setdefault("upiIds", [])
     intelligence.setdefault("phones", [])
     intelligence.setdefault("links", [])
     intelligence.setdefault("bankAccounts", [])
+    intelligence.setdefault("otpCodes", [])
+    intelligence.setdefault("ifscCodes", [])
 
-    # UPI IDs (stricter)
-    upi_matches = re.findall(
-        r"\b[a-zA-Z0-9._-]{3,}@[a-zA-Z]{2,}\b", message
-    )
+    # -----------------------
+    # UPI ID Detection
+    # -----------------------
+    upi_pattern = r"\b[a-zA-Z0-9._-]{2,}@[a-zA-Z]{2,}\b"
+    upis = re.findall(upi_pattern, message)
+    for u in upis:
+        if u not in intelligence["upiIds"]:
+            intelligence["upiIds"].append(u)
 
-    # Phone numbers (10 digits, not part of larger number)
-    phone_matches = re.findall(
-        r"(?<!\d)\d{10}(?!\d)", message
-    )
+    # -----------------------
+    # Phone Number Detection (10 digit Indian)
+    # -----------------------
+    phone_pattern = r"\b[6-9]\d{9}\b"
+    phones = re.findall(phone_pattern, message)
+    for p in phones:
+        if p not in intelligence["phones"]:
+            intelligence["phones"].append(p)
 
-    # Links
-    link_matches = re.findall(
-        r"https?://[^\s]+", message
-    )
+    # -----------------------
+    # Bank Account Detection (12–18 digit numbers)
+    # -----------------------
+    account_pattern = r"\b\d{12,18}\b"
+    accounts = re.findall(account_pattern, message)
+    for acc in accounts:
+        if acc not in intelligence["bankAccounts"]:
+            intelligence["bankAccounts"].append(acc)
 
-    # Bank accounts (11–18 digits ONLY to avoid 10-digit phone clash)
-    bank_matches = re.findall(
-        r"(?<!\d)\d{11,18}(?!\d)", message
-    )
+    # -----------------------
+    # OTP Detection (4–8 digits near OTP keyword)
+    # -----------------------
+    if "otp" in text:
+        otp_pattern = r"\b\d{4,8}\b"
+        otps = re.findall(otp_pattern, message)
+        for o in otps:
+            if o not in intelligence["otpCodes"]:
+                intelligence["otpCodes"].append(o)
 
-    # Deduplicate
-    intelligence["upiIds"] = list(set(intelligence["upiIds"] + upi_matches))
-    intelligence["phones"] = list(set(intelligence["phones"] + phone_matches))
-    intelligence["links"] = list(set(intelligence["links"] + link_matches))
-    intelligence["bankAccounts"] = list(set(intelligence["bankAccounts"] + bank_matches))
+    # -----------------------
+    # IFSC Detection
+    # -----------------------
+    ifsc_pattern = r"\b[A-Z]{4}0[A-Z0-9]{6}\b"
+    ifsc_codes = re.findall(ifsc_pattern, message)
+    for code in ifsc_codes:
+        if code not in intelligence["ifscCodes"]:
+            intelligence["ifscCodes"].append(code)
+
+    # -----------------------
+    # Link Detection
+    # -----------------------
+    link_pattern = r"(https?://[^\s]+)"
+    links = re.findall(link_pattern, message)
+    for l in links:
+        if l not in intelligence["links"]:
+            intelligence["links"].append(l)
