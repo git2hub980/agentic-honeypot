@@ -62,6 +62,46 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
 
         # 🤖 Generate reply (LLM controls extraction naturally)
         reply = generate_smart_reply(message, session)
+                # 🎯 Controlled intelligence extraction (rotating, non-repetitive)
+        if confidence > 0.7:
+
+            if "extraction_step" not in session:
+                session["extraction_step"] = 0
+
+            # Ask extraction question every 3 messages only
+            if session["messages"] % 3 == 0:
+
+                extraction_questions = {
+                    "en": [
+                        " btw which bank is this about?",
+                        " which account is linked to this?",
+                        " what number is registered there?",
+                        " where should i check this exactly?",
+                        " can u confirm ur acc no.?",
+                        " can you resend me ur upi id again?"
+                    ],
+                    "hi": [
+                        " ye kaunsi bank ka hai?",
+                        " kaunsa account linked hai?",
+                        " kaunsa number registered hai?",
+                        " mujhe kaha check karna chahiye?",
+                    ],
+                    "hinglish": [
+                        " ye kaunsi bank ka scene hai?",
+                        " kaunsa account linked hai isse?",
+                        " kaunsa number dala hua hai?",
+                        " kaha check karu main?",
+                    ]
+                }
+
+                lang = session.get("language", "en")
+                questions = extraction_questions.get(lang, extraction_questions["en"])
+
+                step = session["extraction_step"] % len(questions)
+
+                reply += questions[step]
+                session["extraction_step"] += 1
+
 
         # 🚨 Final stage callback
         if confidence > 0.9 or session["messages"] > 18:
