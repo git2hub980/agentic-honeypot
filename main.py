@@ -27,7 +27,9 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
     message = payload["message"]["text"]
 
     session = get_session(session_id)
-    language = detect_language(message)
+    lang_data = detect_language(message)
+    language = lang_data["primary"]
+
     session["language"] = language
 
     session["messages"] += 1
