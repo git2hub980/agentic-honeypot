@@ -43,9 +43,6 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
 
         session["language"] = language
 
-        # 📊 Update message count
-        session["messages"] = len(session["history"])
-
         # 📈 Progressive scam confidence
         confidence = progressive_confidence(message, session["history"])
         session["confidence"] = confidence
@@ -60,6 +57,9 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
             "role": "scammer",
             "content": message
         })
+        # Update message count AFTER storing both sides
+        session["messages"] = len(session["history"])
+
         
         # 🕵️ Extract intelligence
         extract(message, session["intelligence"])
