@@ -44,24 +44,35 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
         session["language"] = language
 
         # 📊 Update message count
-        session["messages"] += 1
+        session["messages"] = len(session["history"])
 
         # 📈 Progressive scam confidence
         confidence = progressive_confidence(message, session["history"])
         session["confidence"] = confidence
-
-        # 🕵️ Extract intelligence
-        extract(message, session["intelligence"])
 
         # 🎭 Persona selection
         persona = choose_persona(confidence, session["history"])
         session["persona"] = persona
 
         # 📜 Store history
-        session["history"].append(message)
+        # Store scammer message
+        session["history"].append({
+            "role": "scammer",
+            "content": message
+        })
+        
+        # 🕵️ Extract intelligence
+        extract(message, session["intelligence"])
+
 
         # 🤖 Generate reply (LLM controls extraction naturally)
         reply = generate_smart_reply(message, session)
+        # Store honeypot reply
+        session["history"].append({
+            "role": "honeypot",
+            "content": reply
+        })
+
                 # 🎯 Controlled intelligence extraction (rotating, non-repetitive)
         if confidence > 0.7:
 
