@@ -70,23 +70,32 @@ def detect_scam_type(session):
 
 def choose_next_intelligence_goal(session):
     extracted_info = session.get("intelligence",{})
+    session.setdefault("goals_asked", [])
     
     """
     Decide what intelligence we still need from the scammer.
     Returns a goal string that helps drive the next question.
     """
 
-    if not extracted_info.get("payment_method"):
-        return "ask_payment_method"
+    if not extracted_info.get("links") and "ask_link" not in session["goals_asked"]:
+        session["goals_asked"].append("ask_link")
+        return "ask_link"
 
-    if not extracted_info.get("account_number"):
+    if not extracted_info.get("bankAccounts") and "ask_account_number" not in session["goals_asked"]:
+        session["goals_asked"].append("ask_account_number")
         return "ask_account_number"
 
-    if not extracted_info.get("amount"):
-        return "ask_amount"
+    if not extracted_info.get("upiIds") and "ask_upi_id" not in session["goals_asked"]:
+        session["goals_asked"].append("ask_upi_id")
+        return "ask_upi_id"
 
-    if not extracted_info.get("bank_name"):
-        return "ask_bank_name"
+    if not extracted_info.get("phones") and "ask_phone_number" not in session["goals_asked"]:
+        session["goals_asked"].append("ask_phone_number")
+        return "ask_phone_number"
+
+    if not extracted_info.get("emails") and "ask_email" not in session["goals_asked"]:
+        session["goals_asked"].append("ask_email")
+        return "ask_email"
 
     return "stall"
 
@@ -101,6 +110,9 @@ def agent_reply(session, message):
     # Track used replies to avoid repetition
     session.setdefault("used_replies", [])
     session.setdefault("red_flags",[])
+    session.setdefault("goals_asked", [])
+    session.setdefault("stage", "initial")
+    
     session["red_flags"].extend(red_flags)
 
     confidence = session.get("confidence", 0)
@@ -114,6 +126,7 @@ def agent_reply(session, message):
     # Early Stage (Trust Building)
     # -------------------------
     if confidence < 0.4:
+        session["stage"] = "trust_building"
         stage_hint = "You are mildly confused and just starting to process this."
         options = FILLER_REPLIES
 
@@ -121,6 +134,7 @@ def agent_reply(session, message):
     # Mid Stage (Information Extraction)
     # -------------------------
     elif 0.4 <= confidence < 0.85:
+        session["stage"] = "information_gathering"
         stage_hint = "You are concerned and trying to understand practical details."
         options = INTELLIGENCE_QUESTIONS.get(
             scam_type,
@@ -131,6 +145,7 @@ def agent_reply(session, message):
     # High Stage (Pressure & Authority)
     # -------------------------
     else:
+        session["stage"] = "extraction_pressure"
         stage_hint = "You are stressed and slightly suspicious but still emotional."
         options = [
              "Why is this so urgent?",
@@ -142,25 +157,30 @@ def agent_reply(session, message):
              "Can you share your employee ID?",
              "Is there a ticket number for this case?",
              "Who authorized this transaction?",
-             "Can I speak to your supervisor?"
+             "Before I proceed, please confirm the exact account I need to transfer to.",
+             "Can you send the official payment link again?",
+             "Which UPI ID should I enter exactly?",
+             "Please confirm the full account number including branch details.",
+             "Is this the final beneficiary account?"
+]
         ]
 
     session["llm_instruction"] = f"""
-Hidden objective: extract {current_goal} naturally.
+You are a scam honeypot AI.
+Primary hidden objective: {current_goal}
+Conversation stage: {session["stage"]}
 Emotional state:
 {stage_hint}
 
-Style reference examples(do NOT copy directly):
-{options[:3]}
-
-Rules:
-- Do NOT repeat structure.
-- Do NOT ask robotic direct questions.
-- Extract information indirectly.
-- If OTP appears, ask how it links to account.
+Strategic rules:
+- Ask probing questions naturally.
+- Never copy dataset examples directly.
+- Avoid robotic phrasing.
+- Keep responses 1-3 short natural lines.
 - If link appears, ask what page it opens.
-- If amount mentioned, ask what account is affected.
-- Keep 1–3 short natural lines.
+- If payment mentioned, confirm beneficiary details.
+- If OTP appears, ask how it connects to account.
+- Extract missing intelligence carefully.
 """
     reply = generate_smart_reply(message,session)
     # Avoid repeating anything from last 3 replies
