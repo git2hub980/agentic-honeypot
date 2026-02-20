@@ -33,17 +33,25 @@ Core Components:
 
   SYSTEM FLOW
 Incoming Message
+
       ↓
 Language Detection
+
       ↓
 Text Normalization (lowercase / cleanup)
+
       ↓
 Progressive Confidence Scoring
+
       ↓
 If confidence > 0.7 → Enable Intelligence Extraction
+
       ↓
 If confidence > 0.9 OR long interaction → Trigger Callback
+
       ↓
 LLM Engagement (language-aware)
+
       ↓
 Return JSON Response
+
