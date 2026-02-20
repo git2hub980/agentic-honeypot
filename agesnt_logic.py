@@ -97,23 +97,31 @@ def choose_next_intelligence_goal(session):
 def agent_reply(session, message):
     red_flags = detect_red_flags(message)
 
-    confidence = session.get("confidence", 0)
-    scam_type = detect_scam_type(session)
-
+    
     # Track used replies to avoid repetition
     session.setdefault("used_replies", [])
-    used = session["used_replies"]
+    session.setdefault("red_flags",[])
+    session["red_flags"].extend(red_flags)
+
+    confidence = session.get("confidence", 0)
+    scam_type = detect_scam_type(session)
+    current_goal = choose_next_intelligence_goal(session)
+    session["current_goal"] = current_goal
+
+
 
     # -------------------------
     # Early Stage (Trust Building)
     # -------------------------
     if confidence < 0.4:
+        stage_hint = "You are mildly confused and just starting to process this."
         options = FILLER_REPLIES
 
     # -------------------------
     # Mid Stage (Information Extraction)
     # -------------------------
     elif 0.4 <= confidence < 0.85:
+        stage_hint = "You are concerned and trying to understand practical details."
         options = INTELLIGENCE_QUESTIONS.get(
             scam_type,
             INTELLIGENCE_QUESTIONS["generic"]
@@ -123,6 +131,7 @@ def agent_reply(session, message):
     # High Stage (Pressure & Authority)
     # -------------------------
     else:
+        stage_hint = "You are stressed and slightly suspicious but still emotional."
         options = [
              "Why is this so urgent?",
              "Can you confirm your official ID?",
@@ -136,23 +145,36 @@ def agent_reply(session, message):
              "Can I speak to your supervisor?"
         ]
 
-    
+    session["llm_instruction"] = f"""
+Hidden objective: extract {current_goal} naturally.
+Emotional state:
+{stage_hint}
+
+Style reference examples(do NOT copy directly):
+{options[:3]}
+
+Rules:
+- Do NOT repeat structure.
+- Do NOT ask robotic direct questions.
+- Extract information indirectly.
+- If OTP appears, ask how it links to account.
+- If link appears, ask what page it opens.
+- If amount mentioned, ask what account is affected.
+- Keep 1–3 short natural lines.
+"""
+    reply = generate_smart_reply(message,session)
     # Avoid repeating anything from last 3 replies
     recent_replies = session["used_replies"][-3:]
 
-    available_options = [opt for opt in options if opt not in recent_replies]
-
-    if not available_options:
-       available_options = options
-
-    reply = generate_smart_reply(message,session)
+    if reply in recent_replies:
+        reply = generate_smart_reply(message, session)
 
     session["used_replies"].append(reply)
-    session["used_replies"] = session["used_replies"][-10:]  # keep last 10 only
-    # Add conversational variation
-   
+    session["used_replies"] = session["used_replies"][-10:]
 
-    # Simulate human delay
+    # -------------------------
+    # Human Delay
+    # -------------------------
     time.sleep(random.uniform(0.6, 1.5))
 
     return reply
