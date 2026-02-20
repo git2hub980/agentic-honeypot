@@ -114,17 +114,17 @@ def extract(message: str, intelligence: dict):
     ]
 
     for e in emails:
-    if e not in intelligence["emails"]:
-        intelligence["emails"].append(e)
-        intelligence["riskScore"] += 1
+         if e not in intelligence["emails"]:
+             intelligence["emails"].append(e)
+             intelligence["riskScore"] += 1
 
-        # inside the loop
-        domain = e.split("@")[-1].lower()
+             # ✅ Add this part inside the loop
+             domain = e.split("@")[-1].lower()
 
-        if domain in common_suspicious_domains:
-            intelligence["riskScore"] += 3
-            if domain not in intelligence["suspiciousDomains"]:
-                intelligence["suspiciousDomains"].append(domain)
+             if domain in common_suspicious_domains:
+                 intelligence["riskScore"] += 3
+                 if domain not in intelligence["suspiciousDomains"]:
+                     intelligence["suspiciousDomains"].append(domain)
 
     # -----------------------
     # Scam Category Signals
