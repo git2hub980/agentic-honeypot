@@ -150,7 +150,8 @@ def send_final_callback(session_id, session):
         response = requests.post(
             "https://hackathon.guvi.in/api/updateHoneyPotFinalResult",
             json=payload,
-            timeout=5
+            headers={"Content-Type":"application/json"},
+            timeout=15
         )
         print("Callback status:", response.status_code)
         print("Callback response:", response.text)
