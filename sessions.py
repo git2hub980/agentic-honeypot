@@ -1,4 +1,4 @@
-import time
+
 
 # In-memory session store
 SESSIONS = {}
@@ -20,8 +20,7 @@ def get_session(session_id: str):
             "persona": None,
             "red_flags": [],
             "used_replies": [],
-            "goals_asked": [],
-            "start_time": time.time()   # ✅ THIS FIXES DURATION
+            "goals_asked": []
         }
 
     return SESSIONS[session_id]
