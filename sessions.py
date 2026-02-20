@@ -1,3 +1,4 @@
+import time
 SESSIONS = {}
 
 def get_session(session_id):
@@ -10,6 +11,7 @@ def get_session(session_id):
             "used_replies": [],
             "language": "en",
             "intelligence": 0,
+            "start_time":time.time()
 
             # 🔥 NEW FIELDS
             "engagement_score": 0,
