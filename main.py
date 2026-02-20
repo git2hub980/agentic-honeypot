@@ -46,13 +46,14 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
 
         # Ensure required keys exist
         session.setdefault("history", [])
-        session.setdefault("intelligence", {
-            "bankAccounts": [],
-            "upiIds": [],
-            "phones": [],
-            "links": [],
-            "emails": []
-        })
+        if not isinstance(session.get("intelligence"), dict):
+           session["intelligence"] = {
+             "bankAccounts": [],
+             "upiIds": [],
+             "phones": [],
+             "links": [],
+             "emails": []
+           }
         session.setdefault("red_flags", [])
         session.setdefault("goals_asked", [])
         session.setdefault("used_replies", [])
