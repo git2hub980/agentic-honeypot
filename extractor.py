@@ -2,6 +2,8 @@ import re
 
 
 def extract(message: str, intelligence: dict):
+    if not isinstance(intelligence, dict):
+        return
     if not message or not isinstance(message, str):
         return
 
