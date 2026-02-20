@@ -90,7 +90,8 @@ def choose_next_intelligence_goal(history, extracted_info):
 # -------------------------
 # Main Reply Generator
 # -------------------------
-def agent_reply(session):
+def agent_reply(session, message):
+    red_flags = detect_red_flags(message)
 
     confidence = session.get("confidence", 0)
     scam_type = detect_scam_type(session)
