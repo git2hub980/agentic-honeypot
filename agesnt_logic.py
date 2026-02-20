@@ -163,7 +163,7 @@ def agent_reply(session, message):
              "Please confirm the full account number including branch details.",
              "Is this the final beneficiary account?"
 ]
-        ]
+        
 
     session["llm_instruction"] = f"""
 You are a scam honeypot AI.
