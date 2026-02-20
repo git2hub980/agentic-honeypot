@@ -95,9 +95,8 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
             "redFlagsDetected": len(session["red_flags"])
         }
 
-        # ✅ RELAXED CALLBACK CONDITION (CHANGED)
-        if confidence >=0.5 and scammer_turns >= 3:
-            send_final_callback(session_id, session)
+        
+        send_final_callback(session_id, session)
 
         return {
             "status": "success",
