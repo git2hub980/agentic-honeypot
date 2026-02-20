@@ -103,7 +103,7 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
             "status": "success",
             "reply": reply,
             "confidence": confidence,
-            "finalResult": final_payload
+            **final_payload
         }
 
     except Exception as e:
