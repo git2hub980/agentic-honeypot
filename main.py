@@ -92,7 +92,7 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
         # ---------------------------
         # 🎭 Persona Selection
         # ---------------------------
-        persona = choose_persona(confidence, session["history"])
+        persona = choose_persona(session)
         session["persona"] = persona
 
         # ---------------------------
