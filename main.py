@@ -36,8 +36,6 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
             raise HTTPException(status_code=400, detail="Invalid payload format")
 
         session = get_session(session_id)
-
-        # ✅ START TIME INITIALIZATION (ADDED)
         if "start_time" not in session:
             session["start_time"] = time.time()
 
@@ -116,11 +114,9 @@ def send_final_callback(session_id, session):
     )
     
     end_time = time.time()
-    start_time = session.get("start_time", end_time - 120)
-
-    duration = end_time - start_time
-
-    engagement_duration = max(int(duration), scammer_turns * 8, 60)
+    start_time = session.get("start_time")
+    duration = int(end_time - start_time) if start_time else 0
+    engagement_duration = max(duration, 60)
 
     payload = {
         "sessionId": session_id,
