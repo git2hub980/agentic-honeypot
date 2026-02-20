@@ -32,6 +32,7 @@ Core Components:
 - Sends structured scam intelligence to monitoring endpoint
 
   SYSTEM FLOW
+  
 Incoming Message
 
       ↓
