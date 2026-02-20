@@ -158,9 +158,12 @@ def send_final_callback(session_id, session):
     
    
     end_time = time.time()
-    start_time=session["start_time"]
-    duration=int(end_time-start_time)
-    engagement_duration = max(duration,65)
+    start_time = session.get("start_time", end_time - 120)
+
+    duration = end_time - start_time
+
+# Ensure realistic engagement time based on conversation depth
+    engagement_duration = max(int(duration), scammer_turns * 8, 60)
 
     payload = {
         "sessionId": session_id,
@@ -200,15 +203,17 @@ def generate_agent_notes(session):
 
     intel = session["intelligence"]
 
-    return f"""
-Scam confidence: {round(session.get('confidence', 0), 2)}
-Conversation depth: {session.get('engagement', {}).get('conversationDepth', 0)} turns
-Red flags detected: {len(session.get('red_flags', []))}
-
-Extracted Intelligence:
-- Bank Accounts: {len(intel.get('bankAccounts', []))}
-- UPI IDs: {len(intel.get('upiIds', []))}
-- Phone Numbers: {len(intel.get('phones', []))}
-- Phishing Links: {len(intel.get('links', []))}
-- Emails: {len(intel.get('emails', []))}
-"""
+    return {
+        "scamConfidence": round(session.get("confidence", 0), 2),
+        "conversationDepth": session.get("engagement", {}).get("conversationDepth", 0),
+        "redFlagsDetected": len(session.get("red_flags", [])),
+        "extractedCounts": {
+            "bankAccounts": len(intel.get("bankAccounts", [])),
+            "upiIds": len(intel.get("upiIds", [])),
+            "phoneNumbers": len(intel.get("phones", [])),
+            "phishingLinks": len(intel.get("links", [])),
+            "emails": len(intel.get("emails", [])),
+            "otpCodes": len(intel.get("otpCodes", [])),
+            "ifscCodes": len(intel.get("ifscCodes", []))
+        }
+    }
