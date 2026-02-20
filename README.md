@@ -31,6 +31,8 @@ Core Components:
 - Triggered at high confidence threshold
 - Sends structured scam intelligence to monitoring endpoint
 
+
+
   SYSTEM FLOW
   
 Incoming Message
