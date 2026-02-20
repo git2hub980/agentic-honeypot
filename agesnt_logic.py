@@ -144,15 +144,12 @@ def agent_reply(session, message):
     if not available_options:
        available_options = options
 
-    reply = random.choice(available_options)
+    reply = generate_smart_reply(message,session)
 
     session["used_replies"].append(reply)
     session["used_replies"] = session["used_replies"][-10:]  # keep last 10 only
     # Add conversational variation
-    prefix_variations = ["Hmm", "Wait", "Okay", "Sorry", "One sec", "Alright"]
-
-    if confidence >= 0.4:
-       reply = random.choice(prefix_variations) + ", " + reply.lower()
+   
 
     # Simulate human delay
     time.sleep(random.uniform(0.6, 1.5))
