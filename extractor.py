@@ -87,7 +87,7 @@ def extract(message: str, intelligence: dict):
     # -----------------------
     # Link Detection
     # -----------------------
-    link_pattern = r"(https?://[^\s]+)"
+    link_pattern = r"(https?://[^\s]+|www\.[^\s]+)"
     links = re.findall(link_pattern, text)
 
     for l in links:
