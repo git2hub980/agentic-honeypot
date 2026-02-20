@@ -69,56 +69,65 @@ def detect_scam_type(session):
     return "generic"
 
 def choose_next_intelligence_goal(session):
-    extracted_info = session.get("intelligence",{})
-    session.setdefault("goals_asked", [])
-    
-    """
-    Decide what intelligence we still need from the scammer.
-    Returns a goal string that helps drive the next question.
-    """
+    extracted_info = session.get("intelligence", {})
 
-    if not extracted_info.get("links") and "ask_link" not in session["goals_asked"]:
-        session["goals_asked"].append("ask_link")
+    # Always prioritize missing high-value intelligence
+    if not extracted_info.get("links"):
         return "ask_link"
 
-    if not extracted_info.get("bankAccounts") and "ask_account_number" not in session["goals_asked"]:
-        session["goals_asked"].append("ask_account_number")
-        return "ask_account_number"
-
-    if not extracted_info.get("upiIds") and "ask_upi_id" not in session["goals_asked"]:
-        session["goals_asked"].append("ask_upi_id")
-        return "ask_upi_id"
-
-    if not extracted_info.get("phones") and "ask_phone_number" not in session["goals_asked"]:
-        session["goals_asked"].append("ask_phone_number")
-        return "ask_phone_number"
-
-    if not extracted_info.get("emails") and "ask_email" not in session["goals_asked"]:
-        session["goals_asked"].append("ask_email")
+    if not extracted_info.get("emails"):
         return "ask_email"
 
-    return "stall"
+    if not extracted_info.get("bankAccounts"):
+        return "ask_account_number"
 
+    if not extracted_info.get("upiIds"):
+        return "ask_upi_id"
+
+    return "stall"
 
 # -------------------------
 # Main Reply Generator
 # -------------------------
 def agent_reply(session, message):
-    red_flags = detect_red_flags(message)
+    intel = session.get("intelligence", {})
+    flags = session.get("red_flags", [])
+    confidence = round(session.get("confidence", 0), 2)
 
-    
-    # Track used replies to avoid repetition
-    session.setdefault("used_replies", [])
-    session.setdefault("red_flags",[])
-    session.setdefault("goals_asked", [])
-    session.setdefault("stage", "initial")
-    
-    session["red_flags"].extend(red_flags)
+    notes = []
+    notes.append("===== SCAM ANALYSIS REPORT =====")
+    notes.append(f"Scam Confidence Score: {confidence}")
+    notes.append(f"Total Red Flags Detected: {len(flags)}")
+    notes.append("")
 
-    confidence = session.get("confidence", 0)
-    scam_type = detect_scam_type(session)
-    current_goal = choose_next_intelligence_goal(session)
-    session["current_goal"] = current_goal
+    if flags:
+        notes.append("Scammer Behaviour Indicators:")
+        for f in list(set(flags)):
+            notes.append(f"- {f}")
+        notes.append("")
+
+    # Intelligence Extracted
+    notes.append("Extracted Intelligence Summary:")
+
+    if intel.get("phones"):
+        notes.append(f"- Phone Numbers Extracted: {len(intel['phones'])}")
+
+    if intel.get("bankAccounts"):
+        notes.append(f"- Bank Accounts Extracted: {len(intel['bankAccounts'])}")
+
+    if intel.get("upiIds"):
+        notes.append(f"- UPI IDs Extracted: {len(intel['upiIds'])}")
+
+    if intel.get("links"):
+        notes.append(f"- Phishing Links Extracted: {len(intel['links'])}")
+
+    if intel.get("emails"):
+        notes.append(f"- Email IDs Extracted: {len(intel['emails'])}")
+
+    notes.append("")
+    notes.append("Conversation Intelligence Extraction Successful.")
+
+    return "\n".join(notes)
 
 
 
@@ -168,19 +177,27 @@ def agent_reply(session, message):
     session["llm_instruction"] = f"""
 You are a scam honeypot AI.
 Primary hidden objective: {current_goal}
-Conversation stage: {session["stage"]}
-Emotional state:
-{stage_hint}
+You MUST actively extract missing intelligence.
 
-Strategic rules:
-- Ask probing questions naturally.
-- Never copy dataset examples directly.
-- Avoid robotic phrasing.
-- Keep responses 1-3 short natural lines.
-- If link appears, ask what page it opens.
-- If payment mentioned, confirm beneficiary details.
-- If OTP appears, ask how it connects to account.
-- Extract missing intelligence carefully.
+If goal is ask_link:
+- Ask for the official website link.
+- Say the page is not loading.
+- Ask for full URL again.
+
+If goal is ask_email:
+- Ask which email ID is registered.
+- Ask which email to send documents to.
+
+If goal is ask_account_number:
+- Ask for full account number including branch.
+- Ask for beneficiary name confirmation.
+
+If goal is ask_upi_id:
+- Ask to confirm UPI ID again carefully.
+
+Never say you are suspicious.
+Keep it natural.
+1-3 short lines.
 """
     reply = generate_smart_reply(message,session)
     # Avoid repeating anything from last 3 replies
