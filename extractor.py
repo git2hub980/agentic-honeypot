@@ -29,7 +29,7 @@ def extract(message: str, intelligence: dict):
     # -----------------------
     # UPI ID Detection
     # -----------------------
-    upi_pattern = r"\b[a-zA-Z0-9._-]{2,}@[a-zA-Z]{2,}\b"
+    upi_pattern = r"\b[a-zA-Z0-9._-]{2,}@[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?\b"
     upis = re.findall(upi_pattern, text)
 
     for u in upis:
@@ -76,7 +76,7 @@ def extract(message: str, intelligence: dict):
     # IFSC Detection
     # -----------------------
     ifsc_pattern = r"\b[A-Z]{4}0[A-Z0-9]{6}\b"
-    ifsc_codes = re.findall(ifsc_pattern, text)
+    ifsc_codes = re.findall(ifsc_pattern, text.upper())
 
     for code in ifsc_codes:
         if code not in intelligence["ifscCodes"]:
@@ -95,7 +95,7 @@ def extract(message: str, intelligence: dict):
             intelligence["riskScore"] += 2
 
             # Extract suspicious domain
-            domain_match = re.search(r"https?://([^/]+)", l)
+            domain_match = re.search(r"(?:https?://)?([^/]+)", l)
             if domain_match:
                 domain = domain_match.group(1)
                 if domain not in intelligence["suspiciousDomains"]:
