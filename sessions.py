@@ -11,7 +11,7 @@ def get_session(session_id):
             "used_replies": [],
             "language": "en",
             "intelligence": 0,
-            "start_time":time.time()
+            "start_time":time.time(),
 
             # 🔥 NEW FIELDS
             "engagement_score": 0,
