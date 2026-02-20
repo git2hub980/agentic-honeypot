@@ -10,7 +10,13 @@ def get_session(session_id):
             "persona": {},
             "used_replies": [],
             "language": "en",
-            "intelligence": 0,
+            "intelligence": {
+                "bankAccounts": [],
+                "upiIds": [],
+                "phones": [],
+                "links": [],
+                "emails": []
+            },
             "start_time":time.time(),
 
             # 🔥 NEW FIELDS
