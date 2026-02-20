@@ -3,6 +3,7 @@ from language_detector import detect_language
 from dotenv import load_dotenv
 import os
 import requests
+import time
 import traceback
 
 from scam_detector import progressive_confidence, detect_red_flags
@@ -43,7 +44,7 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
         # 🧠 Get/Create Session
         # ---------------------------
         session = get_session(session_id)
-        import time
+        
         if "start_time" not in session:
             session["start_time"]=time.time()
 
