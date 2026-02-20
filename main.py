@@ -103,7 +103,7 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
         # ---------------------------
         # 🤖 Agent-Based Reply (No LLM)
         # ---------------------------
-        reply = agent_reply(session)
+        reply = agent_reply(session,message)
 
         # ---------------------------
         # 📜 Store Honeypot Reply
