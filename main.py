@@ -96,7 +96,7 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
         }
 
         # ✅ RELAXED CALLBACK CONDITION (CHANGED)
-        if confidence >=0.5 and scammer_turns >= 4:
+        if confidence >=0.5 and scammer_turns >= 3:
             send_final_callback(session_id, session)
 
         return {
@@ -111,6 +111,10 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
 
 
 def send_final_callback(session_id, session):
+    # Force extraction from full conversation
+    for msg in session["history"]:
+      if msg["role"] == "scammer":
+         extract(msg["content"], session["intelligence"])
 
     scammer_turns = len(
         [m for m in session["history"] if m["role"] == "scammer"]
