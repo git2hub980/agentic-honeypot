@@ -1,5 +1,6 @@
 import random
 import time
+from scam_detector import detect_red_flags
 
 
 # -------------------------
