@@ -9,9 +9,7 @@ from scam_detector import progressive_confidence, detect_red_flags
 from sessions import get_session
 from extractor import extract
 from persona import choose_persona
-from llm_engine import generate_smart_reply
-from agesnt_logic import choose_next_intelligence_goal
-from agesnt_logic import agent_reply
+from agesnt_logic import agent_reply, choose_next_intelligence_goal
 
 load_dotenv()
 app = FastAPI()
@@ -22,7 +20,9 @@ API_KEY = os.getenv("API_KEY")
 @app.post("/honeypot")
 def honeypot(payload: dict, x_api_key: str = Header(...)):
 
+    # ---------------------------
     # 🔐 API Key Validation
+    # ---------------------------
     if not API_KEY:
         raise HTTPException(status_code=500, detail="Server API key not configured")
 
@@ -44,27 +44,24 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
         # ---------------------------
         session = get_session(session_id)
 
-        if "history" not in session:
-            session["history"] = []
-
-        if "intelligence" not in session:
-            session["intelligence"] = {
-                "bankAccounts": [],
-                "upiIds": [],
-                "phones": [],
-                "links": [],
-                "emails": []
-            }
-
-        if "goals_asked" not in session:
-            session["goals_asked"] = []
+        # Ensure required keys exist
+        session.setdefault("history", [])
+        session.setdefault("intelligence", {
+            "bankAccounts": [],
+            "upiIds": [],
+            "phones": [],
+            "links": [],
+            "emails": []
+        })
+        session.setdefault("red_flags", [])
+        session.setdefault("goals_asked", [])
+        session.setdefault("used_replies", [])
 
         # ---------------------------
         # 🌐 Language Detection
         # ---------------------------
         lang_data = detect_language(message)
-        language = lang_data.get("primary", "en")
-        session["language"] = language
+        session["language"] = lang_data.get("primary", "en")
 
         # ---------------------------
         # 📜 Store Scammer Message
@@ -75,13 +72,13 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
         })
 
         # ---------------------------
-        # 🧠 Red Flag Detection
+        # 🚩 Red Flag Detection
         # ---------------------------
         red_flags = detect_red_flags(message)
-        session.setdefault("red_flags", []).extend(red_flags)
+        session["red_flags"].extend(red_flags)
 
         # ---------------------------
-        # 📈 Confidence Scoring
+        # 📈 Progressive Confidence
         # ---------------------------
         confidence = progressive_confidence(message, session["history"])
         session["confidence"] = confidence
@@ -104,9 +101,9 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
         session["current_goal"] = next_goal
 
         # ---------------------------
-        # 🤖 Generate Smart Reply
+        # 🤖 Agent-Based Reply (No LLM)
         # ---------------------------
-        reply = agent_reply(session, message)
+        reply = agent_reply(session)
 
         # ---------------------------
         # 📜 Store Honeypot Reply
@@ -127,7 +124,7 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
             "conversationDepth": scammer_turns,
             "confidenceScore": confidence,
             "personaUsed": persona,
-            "redFlagsDetected": len(session.get("red_flags", []))
+            "redFlagsDetected": len(session["red_flags"])
         }
 
         # ---------------------------
@@ -182,7 +179,7 @@ def generate_agent_notes(session):
     intel = session["intelligence"]
 
     return f"""
-Scam confidence: {round(session['confidence'],2)}
+Scam confidence: {round(session['confidence'], 2)}
 Conversation depth: {session['engagement']['conversationDepth']} turns
 Red flags detected: {len(session.get('red_flags', []))}
 
