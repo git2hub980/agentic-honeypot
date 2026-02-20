@@ -132,7 +132,7 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
         # ---------------------------
         # 🚨 Final Stage Callback
         # ---------------------------
-        if confidence >=0.85 or scammer_turns >= 8:
+        if confidence >=0.9 and scammer_turns >= 8:
             send_final_callback(session_id, session)
 
         return {
