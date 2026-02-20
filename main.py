@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Header, HTTPException
+from fastapi import FastAPI, Header, HTTPException, json
 from language_detector import detect_language
 from dotenv import load_dotenv
 import os
@@ -171,7 +171,7 @@ def send_final_callback(session_id, session):
             "engagementDurationSeconds": engagement_duration
         },
         "redFlags": session.get("red_flags", []),
-        "agentNotes": generate_agent_notes(session)
+        "agentNotes": json.dumps(generate_agent_notes(session))
     }
 
     try:
