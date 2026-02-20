@@ -39,8 +39,7 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
         # Get persistent session
         session = get_session(session_id)
 
-        # Set start time if missing
-        session.setdefault("start_time", time.time())
+        
 
         # Initialize session keys
         session.setdefault("history", [])
