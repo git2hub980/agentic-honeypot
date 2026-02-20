@@ -1,13 +1,12 @@
 import json
-from fastapi import FastAPI, Header, HTTPException
-
-from language_detector import detect_language
-from dotenv import load_dotenv
-import os
-import requests
 import time
 import traceback
+import requests
+from fastapi import FastAPI, Header, HTTPException
+from dotenv import load_dotenv
+import os
 
+from language_detector import detect_language
 from scam_detector import progressive_confidence, detect_red_flags
 from sessions import get_session
 from extractor import extract
@@ -36,28 +35,30 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
         if not session_id or not message:
             raise HTTPException(status_code=400, detail="Invalid payload format")
 
+        # Get persistent session
         session = get_session(session_id)
 
-        if "start_time" not in session:
-            session["start_time"] = time.time()
+        # Set start time if missing
+        session.setdefault("start_time", time.time())
 
+        # Initialize session keys
         session.setdefault("history", [])
         session.setdefault("agent_notes", [])
-
-        if not isinstance(session.get("intelligence"), dict):
-            session["intelligence"] = {
-                "bankAccounts": [],
-                "upiIds": [],
-                "phones": [],
-                "links": [],
-                "emails": [],
-                "otpCodes": [],
-                "ifscCodes": []
-            }
-
         session.setdefault("red_flags", [])
         session.setdefault("goals_asked", [])
         session.setdefault("used_replies", [])
+        session.setdefault("intelligence", {
+            "bankAccounts": [],
+            "upiIds": [],
+            "phones": [],
+            "links": [],
+            "emails": [],
+            "otpCodes": [],
+            "ifscCodes": [],
+            "suspiciousDomains": [],
+            "scamCategorySignals": [],
+            "riskScore": 0
+        })
 
         # Detect language
         lang_data = detect_language(message)
@@ -70,23 +71,19 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
         })
 
         # Detect red flags
-        red_flags = detect_red_flags(message)
-        session["red_flags"].extend(red_flags)
+        session["red_flags"].extend(detect_red_flags(message))
 
         # Progressive confidence
-        confidence = progressive_confidence(message, session["history"])
-        session["confidence"] = confidence
+        session["confidence"] = progressive_confidence(message, session["history"])
 
         # Extract intelligence
         extract(message, session["intelligence"])
 
-        # Persona
-        persona = choose_persona(session)
-        session["persona"] = persona
+        # Choose persona
+        session["persona"] = choose_persona(session)
 
-        # Intelligence goal
-        next_goal = choose_next_intelligence_goal(session)
-        session["current_goal"] = next_goal
+        # Next intelligence goal
+        session["current_goal"] = choose_next_intelligence_goal(session)
 
         # Generate reply
         reply = agent_reply(session, message)
@@ -96,42 +93,29 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
             "content": reply
         })
 
-        scammer_turns = len(
-            [m for m in session["history"] if m["role"] == "scammer"]
-        )
-
+        # Update engagement metrics
+        scammer_turns = len([m for m in session["history"] if m["role"] == "scammer"])
         session["engagement"] = {
             "conversationDepth": scammer_turns,
-            "confidenceScore": confidence,
-            "personaUsed": persona,
+            "confidenceScore": session["confidence"],
+            "personaUsed": session["persona"],
             "redFlagsDetected": len(session["red_flags"])
         }
 
-        # Send final callback
+        # Send final callback and get finalized payload
         final_payload = send_final_callback(session_id, session)
 
-        # Return strict UI payload (NO extra keys)
+        # Return strict UI payload
         return {
             "reply": reply,
-            "confidence": confidence,
+            "confidence": session["confidence"],
             "sessionId": session_id,
             "scamDetected": session["confidence"] >= 0.5,
             "totalMessagesExchanged": scammer_turns,
-            "extractedIntelligence": {
-                "phoneNumbers": session["intelligence"].get("phones", []),
-                "bankAccounts": session["intelligence"].get("bankAccounts", []),
-                "upiIds": session["intelligence"].get("upiIds", []),
-                "phishingLinks": session["intelligence"].get("links", []),
-                "emailAddresses": session["intelligence"].get("emails", []),
-                "otpCodes": session["intelligence"].get("otpCodes", []),
-                "ifscCodes": session["intelligence"].get("ifscCodes", [])
-            },
-            "engagementMetrics": {
-                "totalMessagesExchanged": scammer_turns,
-                "engagementDurationSeconds": final_payload["engagementMetrics"]["engagementDurationSeconds"]
-            },
-            "redFlags": session.get("red_flags", []),
-            "agentNotes": json.dumps(generate_agent_notes(session))
+            "extractedIntelligence": final_payload["extractedIntelligence"],
+            "engagementMetrics": final_payload["engagementMetrics"],
+            "redFlags": final_payload["redFlags"],
+            "agentNotes": final_payload["agentNotes"]
         }
 
     except Exception as e:
@@ -140,18 +124,24 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
 
 
 def send_final_callback(session_id, session):
+    """
+    Final extraction + callback to external endpoint.
+    Ensures engagement duration, intelligence, and notes are accurate.
+    """
 
-    # Force re-extraction from entire conversation
+    # Re-extract intelligence from all scammer messages
     for msg in session["history"]:
         if msg["role"] == "scammer":
             extract(msg["content"], session["intelligence"])
 
-    scammer_turns = len(
-        [m for m in session["history"] if m["role"] == "scammer"]
-    )
+    scammer_turns = len([m for m in session["history"] if m["role"] == "scammer"])
 
-    engagement_duration = max(scammer_turns*12,60)
+    # Compute real engagement duration
+    end_time = time.time()
+    start_time = session.get("start_time", end_time)
+    engagement_duration = max(int(end_time - start_time), 1)  # at least 1s
 
+    # Prepare payload
     payload = {
         "sessionId": session_id,
         "scamDetected": session["confidence"] >= 0.5,
@@ -163,7 +153,7 @@ def send_final_callback(session_id, session):
             "phishingLinks": session["intelligence"].get("links", []),
             "emailAddresses": session["intelligence"].get("emails", []),
             "otpCodes": session["intelligence"].get("otpCodes", []),
-            "ifscCodes": session["intelligence"].get("ifscCodes", [])
+            "ifscCodes": session["intelligence"].get("ifscCodes", []),
         },
         "engagementMetrics": {
             "totalMessagesExchanged": scammer_turns,
@@ -173,6 +163,7 @@ def send_final_callback(session_id, session):
         "agentNotes": json.dumps(generate_agent_notes(session))
     }
 
+    # Send callback (optional failure-safe)
     try:
         response = requests.post(
             "https://hackathon.guvi.in/api/updateHoneyPotFinalResult",
@@ -182,7 +173,6 @@ def send_final_callback(session_id, session):
         )
         print("Callback status:", response.status_code)
         print("Callback response:", response.text)
-
     except Exception as e:
         print("Callback error:", str(e))
 
@@ -190,7 +180,6 @@ def send_final_callback(session_id, session):
 
 
 def generate_agent_notes(session):
-
     intel = session["intelligence"]
 
     return {
