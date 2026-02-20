@@ -177,7 +177,6 @@ def send_final_callback(session_id, session):
     }
 
     try:
-        time.sleep(2)
         response = requests.post(
             "https://hackathon.guvi.in/api/updateHoneyPotFinalResult",
             json=payload,
