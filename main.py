@@ -158,7 +158,7 @@ def send_final_callback(session_id, session):
     
    
     end_time = time.time()
-    start_time=session.get("start_time",time.time())
+    start_time=session["start_time"]
     duration=int(end_time-start_time)
     engagement_duration = max(duration,65)
 
