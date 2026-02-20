@@ -1,15 +1,13 @@
 import time
+
+# In-memory session store
 SESSIONS = {}
 
-def get_session(session_id):
+def get_session(session_id: str):
     if session_id not in SESSIONS:
         SESSIONS[session_id] = {
+            "id": session_id,
             "history": [],
-            "confidence": 0.0,
-            "messages": 0,
-            "persona": {},
-            "used_replies": [],
-            "language": "en",
             "intelligence": {
                 "bankAccounts": [],
                 "upiIds": [],
@@ -17,13 +15,13 @@ def get_session(session_id):
                 "links": [],
                 "emails": []
             },
-            "start_time":time.time(),
-
-            # 🔥 NEW FIELDS
-            "engagement_score": 0,
-            "response_times": [],
-            "risk_flags": [],
-            "agent_notes": [],
-            "scam_signals": []
+            "confidence": 0,
+            "language": "en",
+            "persona": None,
+            "red_flags": [],
+            "used_replies": [],
+            "goals_asked": [],
+            "start_time": time.time()   # ✅ THIS FIXES DURATION
         }
+
     return SESSIONS[session_id]
