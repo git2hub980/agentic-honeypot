@@ -46,7 +46,9 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
              "upiIds": [],
              "phones": [],
              "links": [],
-             "emails": []
+             "emails": [],
+             "otpCodes": [],
+             "ifscCodes":[]
            }
         session.setdefault("red_flags", [])
         session.setdefault("goals_asked", [])
