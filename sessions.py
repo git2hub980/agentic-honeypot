@@ -1,5 +1,3 @@
-
-
 # In-memory session store
 SESSIONS = {}
 
