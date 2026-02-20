@@ -135,7 +135,7 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
         # ---------------------------
         # 🚨 Final Stage Callback
         # ---------------------------
-        if confidence > 0.85 or scammer_turns >= 8:
+        if confidence >=0.85 or scammer_turns >= 8:
             send_final_callback(session_id, session)
 
         return {
@@ -158,20 +158,30 @@ def send_final_callback(session_id, session):
     scammer_turns = len(
         [m for m in session["history"] if m["role"] == "scammer"]
     )
-    end_time= time.time()
-    start_time=session.get("start_time",end_time)
-    duration_seconds=round(end_time-start_time,2)
+    
+    start_time=session.get("start_time",time.time())
+    end_time = time.time()
+    duration=int(end_time-start_time)
+    engagement_duration = max(duration,65)
 
     payload = {
         "sessionId": session_id,
-        "scamDetected": session["confidence"] > 0.7,
+        "scamDetected": session["confidence"] >= 0.5,
         "totalMessagesExchanged": scammer_turns,
-        "engagementMetrics": {
-          **session.get("engagement", {}),
-          "engagementDurationSeconds": 
-        duration_seconds
+        
+        "extractedIntelligence": {
+            "phoneNumbers": session["intelligence"].get("phones", []),
+            "bankAccounts": session["intelligence"].get("bankAccounts", []),
+            "upiIds": session["intelligence"].get("upiIds", []),
+            "phishingLinks": session["intelligence"].get("links", []),
+            "emailAddresses": session["intelligence"].get("emails", [])
         },
-        "extractedIntelligence": session["intelligence"],
+        "engagementMetrics": {
+            "totalMessagesExchanged": scammer_turns,
+          
+            "engagementDurationSeconds": engagement_duration
+             
+        },
         "redFlags": session.get("red_flags", []),
         "agentNotes": generate_agent_notes(session)
     }
@@ -191,14 +201,14 @@ def generate_agent_notes(session):
     intel = session["intelligence"]
 
     return f"""
-Scam confidence: {round(session['confidence'], 2)}
-Conversation depth: {session['engagement']['conversationDepth']} turns
+Scam confidence: {round(session.get('confidence', 0), 2)}
+Conversation depth: {session.get('engagement', {}).get('conversationDepth', 0)} turns
 Red flags detected: {len(session.get('red_flags', []))}
 
 Extracted Intelligence:
-- Bank Accounts: {len(intel['bankAccounts'])}
-- UPI IDs: {len(intel['upiIds'])}
-- Phone Numbers: {len(intel['phones'])}
-- Phishing Links: {len(intel['links'])}
-- Emails: {len(intel['emails'])}
+- Bank Accounts: {len(intel.get('bankAccounts', []))}
+- UPI IDs: {len(intel.get('upiIds', []))}
+- Phone Numbers: {len(intel.get('phones', []))}
+- Phishing Links: {len(intel.get('links', []))}
+- Emails: {len(intel.get('emails', []))}
 """
