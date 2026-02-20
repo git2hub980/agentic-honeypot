@@ -89,7 +89,7 @@ def detect_red_flags(message):
     return found
 
 
-def agent_reply(session, message):
+def agent_reply(session):
 
     intelligence = session.get("intelligence", {})
     confidence = session.get("confidence", 0)
