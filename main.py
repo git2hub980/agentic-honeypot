@@ -44,9 +44,6 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
         # 🧠 Get/Create Session
         # ---------------------------
         session = get_session(session_id)
-        
-        if "start_time" not in session:
-            session["start_time"]=time.time()
 
         # Ensure required keys exist
         session.setdefault("history", [])
@@ -159,8 +156,9 @@ def send_final_callback(session_id, session):
         [m for m in session["history"] if m["role"] == "scammer"]
     )
     
-    start_time=session.get("start_time",time.time())
+   
     end_time = time.time()
+    start_time=session.get("start_time",time.time())
     duration=int(end_time-start_time)
     engagement_duration = max(duration,65)
 
