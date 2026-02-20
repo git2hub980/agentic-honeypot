@@ -131,7 +131,7 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
                 "engagementDurationSeconds": final_payload["engagementMetrics"]["engagementDurationSeconds"]
             },
             "redFlags": session.get("red_flags", []),
-            "agentNotes": generate_agent_notes(session)
+            "agentNotes": json.dumps(generate_agent_notes(session))
         }
 
     except Exception as e:
