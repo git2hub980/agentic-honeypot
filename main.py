@@ -40,6 +40,7 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
             session["start_time"] = time.time()
 
         session.setdefault("history", [])
+        session.setdefault("agent_notes", [])
         if not isinstance(session.get("intelligence"), dict):
            session["intelligence"] = {
              "bankAccounts": [],
