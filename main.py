@@ -43,6 +43,9 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
         # 🧠 Get/Create Session
         # ---------------------------
         session = get_session(session_id)
+        import time
+        if "start_time" not in session:
+            session["start_time"]=time.time()
 
         # Ensure required keys exist
         session.setdefault("history", [])
@@ -154,12 +157,19 @@ def send_final_callback(session_id, session):
     scammer_turns = len(
         [m for m in session["history"] if m["role"] == "scammer"]
     )
+    end_time= time.time()
+    start_time=session.get("start_time",end_time)
+    duration_seconds=round(end_time-start_time,2)
 
     payload = {
         "sessionId": session_id,
         "scamDetected": session["confidence"] > 0.7,
         "totalMessagesExchanged": scammer_turns,
-        "engagementMetrics": session.get("engagement", {}),
+        "engagementMetrics": {
+          **session.get("engagement", {}),
+          "engagementDurationSeconds": 
+        duration_seconds
+        },
         "extractedIntelligence": session["intelligence"],
         "redFlags": session.get("red_flags", []),
         "agentNotes": generate_agent_notes(session)
