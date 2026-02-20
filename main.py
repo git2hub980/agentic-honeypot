@@ -95,13 +95,15 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
             "redFlagsDetected": len(session["red_flags"])
         }
 
-        
-        send_final_callback(session_id, session)
+        # ✅ CHANGE: capture final payload
+        final_payload = send_final_callback(session_id, session)
 
+        # ✅ CHANGE: return final payload so UI can show black box
         return {
             "status": "success",
             "reply": reply,
-            "confidence": confidence
+            "confidence": confidence,
+            "finalResult": final_payload
         }
 
     except Exception as e:
@@ -157,6 +159,9 @@ def send_final_callback(session_id, session):
         print("Callback response:", response.text)
     except Exception as e:
         print("Callback error:", str(e))
+
+    # ✅ CHANGE: return payload so frontend can render black box
+    return payload
 
 
 def generate_agent_notes(session):
