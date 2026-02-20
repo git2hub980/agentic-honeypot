@@ -1,4 +1,5 @@
-from fastapi import FastAPI, Header, HTTPException, json
+from fastapi import FastAPI, Header, HTTPException
+import json
 from language_detector import detect_language
 from dotenv import load_dotenv
 import os
