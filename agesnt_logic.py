@@ -66,6 +66,26 @@ def detect_scam_type(session):
 
     return "generic"
 
+def choose_next_intelligence_goal(history, extracted_info):
+    """
+    Decide what intelligence we still need from the scammer.
+    Returns a goal string that helps drive the next question.
+    """
+
+    if not extracted_info.get("payment_method"):
+        return "ask_payment_method"
+
+    if not extracted_info.get("account_number"):
+        return "ask_account_number"
+
+    if not extracted_info.get("amount"):
+        return "ask_amount"
+
+    if not extracted_info.get("bank_name"):
+        return "ask_bank_name"
+
+    return "stall"
+
 
 # -------------------------
 # Main Reply Generator
