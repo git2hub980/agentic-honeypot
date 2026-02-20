@@ -10,7 +10,8 @@ from sessions import get_session
 from extractor import extract
 from persona import choose_persona
 from llm_engine import generate_smart_reply
-from agsent_logic import choose_next_intelligence_goal
+from agesnt_logic import choose_next_intelligence_goal
+from agesnt_logic import agent_reply
 
 load_dotenv()
 app = FastAPI()
@@ -105,7 +106,7 @@ def honeypot(payload: dict, x_api_key: str = Header(...)):
         # ---------------------------
         # 🤖 Generate Smart Reply
         # ---------------------------
-        reply = generate_smart_reply(message, session)
+        reply = agent_reply(session, message)
 
         # ---------------------------
         # 📜 Store Honeypot Reply
