@@ -1,6 +1,7 @@
 import random
 import time
 from scam_detector import detect_red_flags
+from llm_engine import generate_smart_reply
 
 
 # -------------------------
