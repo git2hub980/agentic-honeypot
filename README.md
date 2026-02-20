@@ -14,7 +14,7 @@ Core Components:
 - Maintains conversation history
 - Returns structured JSON response
 
-2)Progressive Confidence Engine
+2) Progressive Confidence Engine
 - Weighted keyword scoring
 - Conversation-length escalation
 - Normalized confidence (0.0 – 1.0)
