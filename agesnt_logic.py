@@ -123,21 +123,36 @@ def agent_reply(session, message):
     # -------------------------
     else:
         options = [
-            "Why is this so urgent?",
-            "Can you confirm your official ID?",
-            "Is this being recorded for security purposes?",
-            "Can you provide your supervisor contact?"
+             "Why is this so urgent?",
+             "Can you confirm your official ID?",
+             "Is this being recorded for security purposes?",
+             "Can you provide your supervisor contact?",
+             "Which department are you calling from?",
+             "Is this monitored officially?",
+             "Can you share your employee ID?",
+             "Is there a ticket number for this case?",
+             "Who authorized this transaction?",
+             "Can I speak to your supervisor?"
         ]
 
-    # Avoid repeating same reply
-    reply = random.choice(options)
-    attempts = 0
-    while reply in used and attempts < 5:
-        reply = random.choice(options)
-        attempts += 1
+    
+    # Avoid repeating anything from last 3 replies
+    recent_replies = session["used_replies"][-3:]
 
-    used.append(reply)
-    session["used_replies"] = used[-10:]  # keep last 10 only
+    available_options = [opt for opt in options if opt not in recent_replies]
+
+    if not available_options:
+       available_options = options
+
+    reply = random.choice(available_options)
+
+    session["used_replies"].append(reply)
+    session["used_replies"] = session["used_replies"][-10:]  # keep last 10 only
+    # Add conversational variation
+    prefix_variations = ["Hmm", "Wait", "Okay", "Sorry", "One sec", "Alright"]
+
+    if confidence >= 0.4:
+       reply = random.choice(prefix_variations) + ", " + reply.lower()
 
     # Simulate human delay
     time.sleep(random.uniform(0.6, 1.5))
