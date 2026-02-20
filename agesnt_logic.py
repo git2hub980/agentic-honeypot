@@ -67,7 +67,9 @@ def detect_scam_type(session):
 
     return "generic"
 
-def choose_next_intelligence_goal(history, extracted_info):
+def choose_next_intelligence_goal(session):
+    extracted_info = session.get("intelligence",{})
+    
     """
     Decide what intelligence we still need from the scammer.
     Returns a goal string that helps drive the next question.
