@@ -150,13 +150,7 @@ def send_final_callback(session_id, session):
         [m for m in session["history"] if m["role"] == "scammer"]
     )
 
-    end_time = time.time()
-    start_time = session.get("start_time")
-    if start_time:
-        duration = max(int(end_time - start_time), 1)  # ensure at least 1 second
-    else:
-        duration = 1  # fallback
-    engagement_duration = duration
+    engagement_duration = max(scammer_turns*12,60)
 
     payload = {
         "sessionId": session_id,
