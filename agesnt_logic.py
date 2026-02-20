@@ -3,21 +3,19 @@ import time
 
 
 # -------------------------
-# Natural filler replies
+# Natural filler replies (early trust building)
 # -------------------------
-FILLER_REPLIES = {
-    "en": [
-        "Ok I am checking",
-        "Can you wait a minute?",
-        "Let me verify once",
-        "Something looks off here",
-        "It is loading slowly",
-        "There seems to be a delay",
-        "It is asking for verification again",
-        "System is showing an error",
-        "Network seems unstable"
-    ]
-}
+FILLER_REPLIES = [
+    "Ok I am checking.",
+    "Can you wait a minute?",
+    "Let me verify once.",
+    "Something looks off here.",
+    "It is loading slowly.",
+    "There seems to be a delay.",
+    "It is asking for verification again.",
+    "System is showing an error.",
+    "Network seems unstable."
+]
 
 
 # -------------------------
@@ -28,109 +26,96 @@ INTELLIGENCE_QUESTIONS = {
         "Which branch is handling this?",
         "Can you confirm the account number again?",
         "Is this linked to my registered mobile number?",
-        "What is the IFSC code there?",
+        "What is the IFSC code there?"
     ],
     "upi_fraud": [
         "Which UPI ID should I verify?",
-        "Is this linked to my Paytm or Google Pay?",
+        "Is this linked to Paytm or Google Pay?",
         "Can you resend the UPI ID?",
-        "What number is registered for this cashback?",
+        "What number is registered for this cashback?"
     ],
     "phishing": [
         "Is this the official website?",
         "Can you resend the link?",
         "Why is the domain name different?",
-        "Is this the secure page?",
+        "Is this the secure page?"
     ],
     "generic": [
         "Can you explain that again?",
         "Which department are you from?",
-        "Is this urgent?",
+        "Is this urgent?"
     ]
 }
 
 
 # -------------------------
-# Red Flag Keywords
+# Detect Scam Type from Extracted Intelligence
 # -------------------------
-RED_FLAGS = [
-    "otp",
-    "account number",
-    "verify",
-    "click",
-    "urgent",
-    "limited time",
-    "transfer",
-    "processing fee"
-]
-
-
 def detect_scam_type(session):
-    signals = session.get("intelligence", {}).get("scamCategorySignals", [])
 
-    if "bank_fraud" in signals:
+    intel = session.get("intelligence", {})
+
+    if intel.get("bankAccounts"):
         return "bank_fraud"
-    if "reward_scam" in signals:
+
+    if intel.get("upiIds"):
         return "upi_fraud"
-    if "phishing" in signals:
+
+    if intel.get("links"):
         return "phishing"
 
     return "generic"
 
 
-def detect_red_flags(message):
-    message = message.lower()
-    found = []
-
-    for flag in RED_FLAGS:
-        if flag in message:
-            found.append(flag)
-
-    return found
-
-
+# -------------------------
+# Main Reply Generator
+# -------------------------
 def agent_reply(session):
 
-    intelligence = session.get("intelligence", {})
     confidence = session.get("confidence", 0)
-
-    # -------------------------
-    # Red flag tracking
-    # -------------------------
-    red_flags = detect_red_flags(message)
-    session.setdefault("redFlagsDetected", [])
-    session["redFlagsDetected"].extend(red_flags)
-    session["redFlagsDetected"] = list(set(session["redFlagsDetected"]))
-
-    # -------------------------
-    # Choose scam type
-    # -------------------------
     scam_type = detect_scam_type(session)
 
+    # Track used replies to avoid repetition
+    session.setdefault("used_replies", [])
+    used = session["used_replies"]
+
     # -------------------------
-    # Early Stage (Build Trust)
+    # Early Stage (Trust Building)
     # -------------------------
     if confidence < 0.4:
-        reply = random.choice(FILLER_REPLIES["en"])
+        options = FILLER_REPLIES
 
     # -------------------------
-    # Mid Stage (Extract Info)
+    # Mid Stage (Information Extraction)
     # -------------------------
     elif 0.4 <= confidence < 0.85:
-        questions = INTELLIGENCE_QUESTIONS.get(scam_type, INTELLIGENCE_QUESTIONS["generic"])
-        reply = random.choice(questions)
+        options = INTELLIGENCE_QUESTIONS.get(
+            scam_type,
+            INTELLIGENCE_QUESTIONS["generic"]
+        )
 
     # -------------------------
-    # High Stage (Pressure Extraction)
+    # High Stage (Pressure & Authority)
     # -------------------------
     else:
-        high_pressure_questions = [
+        options = [
             "Why is this so urgent?",
             "Can you confirm your official ID?",
-            "Is this recorded for security?",
+            "Is this being recorded for security purposes?",
             "Can you provide your supervisor contact?"
         ]
-        reply = random.choice(high_pressure_questions)
 
+    # Avoid repeating same reply
+    reply = random.choice(options)
+    attempts = 0
+    while reply in used and attempts < 5:
+        reply = random.choice(options)
+        attempts += 1
+
+    used.append(reply)
+    session["used_replies"] = used[-10:]  # keep last 10 only
+
+    # Simulate human delay
     time.sleep(random.uniform(0.6, 1.5))
+
     return reply
