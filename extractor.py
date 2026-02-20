@@ -1,6 +1,5 @@
 import re
 
-
 def extract(message: str, intelligence: dict):
     if not isinstance(intelligence, dict):
         return
