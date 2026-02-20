@@ -90,44 +90,42 @@ def choose_next_intelligence_goal(session):
 # Main Reply Generator
 # -------------------------
 def agent_reply(session, message):
+
     intel = session.get("intelligence", {})
     flags = session.get("red_flags", [])
     confidence = round(session.get("confidence", 0), 2)
 
-    notes = []
-    notes.append("===== SCAM ANALYSIS REPORT =====")
-    notes.append(f"Scam Confidence Score: {confidence}")
-    notes.append(f"Total Red Flags Detected: {len(flags)}")
-    notes.append("")
+    scam_type = detect_scam_type(session)
+    current_goal = session.get("current_goal", "stall")
 
-    if flags:
-        notes.append("Scammer Behaviour Indicators:")
-        for f in list(set(flags)):
-            notes.append(f"- {f}")
-        notes.append("")
+    # Early Stage
+    if confidence < 0.4:
+        session["stage"] = "trust_building"
 
-    # Intelligence Extracted
-    notes.append("Extracted Intelligence Summary:")
+    elif 0.4 <= confidence < 0.85:
+        session["stage"] = "information_gathering"
 
-    if intel.get("phones"):
-        notes.append(f"- Phone Numbers Extracted: {len(intel['phones'])}")
+    else:
+        session["stage"] = "extraction_pressure"
 
-    if intel.get("bankAccounts"):
-        notes.append(f"- Bank Accounts Extracted: {len(intel['bankAccounts'])}")
+    session["llm_instruction"] = f"""
+    You are a scam honeypot AI.
+    Primary hidden objective: {current_goal}
+    ...
+    """
 
-    if intel.get("upiIds"):
-        notes.append(f"- UPI IDs Extracted: {len(intel['upiIds'])}")
+    reply = generate_smart_reply(message, session)
 
-    if intel.get("links"):
-        notes.append(f"- Phishing Links Extracted: {len(intel['links'])}")
+    recent_replies = session["used_replies"][-3:]
+    if reply in recent_replies:
+        reply = generate_smart_reply(message, session)
 
-    if intel.get("emails"):
-        notes.append(f"- Email IDs Extracted: {len(intel['emails'])}")
+    session["used_replies"].append(reply)
+    session["used_replies"] = session["used_replies"][-10:]
 
-    notes.append("")
-    notes.append("Conversation Intelligence Extraction Successful.")
+    time.sleep(random.uniform(0.6, 1.5))
 
-    return "\n".join(notes)
+    return reply
 
 
 
