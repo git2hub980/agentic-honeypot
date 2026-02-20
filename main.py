@@ -152,8 +152,11 @@ def send_final_callback(session_id, session):
 
     end_time = time.time()
     start_time = session.get("start_time")
-    duration = int(end_time - start_time) if start_time else 0
-    engagement_duration = max(duration, 60)
+    if start_time:
+        duration = max(int(end_time - start_time), 1)  # ensure at least 1 second
+    else:
+        duration = 1  # fallback
+    engagement_duration = duration
 
     payload = {
         "sessionId": session_id,
