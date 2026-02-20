@@ -167,13 +167,15 @@ def send_final_callback(session_id, session):
         "scamDetected": session["confidence"] >= 0.5,
         "totalMessagesExchanged": scammer_turns,
         
-        "extractedIntelligence": {
-            "phoneNumbers": session["intelligence"].get("phones", []),
-            "bankAccounts": session["intelligence"].get("bankAccounts", []),
-            "upiIds": session["intelligence"].get("upiIds", []),
-            "phishingLinks": session["intelligence"].get("links", []),
-            "emailAddresses": session["intelligence"].get("emails", [])
-        },
+    "extractedIntelligence": {
+        "phoneNumbers": session["intelligence"].get("phones", []),
+        "bankAccounts": session["intelligence"].get("bankAccounts", []),
+        "upiIds": session["intelligence"].get("upiIds", []),
+        "phishingLinks": session["intelligence"].get("links", []),
+        "emailAddresses": session["intelligence"].get("emails", []),
+        "otpCodes": session["intelligence"].get("otpCodes", []),
+        "ifscCodes": session["intelligence"].get("ifscCodes", [])
+    },
         "engagementMetrics": {
             "totalMessagesExchanged": scammer_turns,
           
