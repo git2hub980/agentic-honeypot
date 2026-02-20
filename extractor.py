@@ -10,6 +10,9 @@ def extract(message: str, intelligence: dict):
     text = message.strip()
     lower_text = text.lower()
 
+    text = text.replace("(at)", "@").replace(" at ", "@")
+    text = text.replace("(dot)", ".").replace(" dot ", ".")
+
     # -----------------------
     # Initialize Intelligence Structure
     # -----------------------
@@ -102,8 +105,14 @@ def extract(message: str, intelligence: dict):
     # -----------------------
     # Email Detection
     # -----------------------
-    email_pattern = r"\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\b"
+    email_pattern = r"\b[a-zA-Z0-9._%+-]{2,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}\b"
     emails = re.findall(email_pattern, text)
+
+    common_suspicious_domains = [
+        "gmail-security.com",
+        "secure-bank.net",
+        "verify-update.com"
+    ]
 
     for e in emails:
         if e not in intelligence["emails"]:
@@ -125,6 +134,11 @@ def extract(message: str, intelligence: dict):
 
     if "bank" in lower_text or "account" in lower_text:
         intelligence["scamCategorySignals"].append("bank_fraud")
+
+    if "email" in lower_text:
+        if "email_collection_attempt" not in intelligence["scamCategorySignals"]:
+            intelligence["scamCategorySignals"].append("email_collection_attempt")
+            intelligence["riskScore"] += 1
 
     # Remove duplicates
     intelligence["scamCategorySignals"] = list(
